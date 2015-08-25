@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Tasvir H Rohila. All rights reserved.
 //
 
-#import "HttpNetworkClient.h"
+#import "HttpNetworkModel.h"
 
-@implementation HttpNetworkClient
+@implementation HttpNetworkModel
 
 @end

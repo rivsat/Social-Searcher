@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HttpNetworkModel.h"
 
-@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MainViewController : UIViewController <UITableViewDataSource, HttpNetworkModelDelegate>
 
 
 @end

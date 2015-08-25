@@ -10,4 +10,15 @@
 
 @interface SearchTableViewCell : UITableViewCell
 
+//UIImageView
+@property (nonatomic, weak) IBOutlet UIImageView* profileImage;
+//User name
+@property (nonatomic, weak) IBOutlet UILabel* nameLabel;
+//Display Name
+@property (nonatomic, weak) IBOutlet UILabel* displayNameLabel;
+//Tweet Text
+@property (nonatomic, weak) IBOutlet UITextView* tweetTextView;
+
+
+
 @end

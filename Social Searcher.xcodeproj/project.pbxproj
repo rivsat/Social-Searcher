@@ -18,6 +18,8 @@
 		6DFB1BDF1B8C4C4600514523 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFB1BDE1B8C4C4600514523 /* Accounts.framework */; };
 		6DFB1BE11B8C4C6A00514523 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFB1BE01B8C4C6A00514523 /* UIKit.framework */; };
 		6DFB1BEB1B8C5C1E00514523 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BEA1B8C5C1E00514523 /* SearchTableViewCell.m */; };
+		6DFB1BEE1B8C62F200514523 /* HttpNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BED1B8C62F200514523 /* HttpNetworkModel.m */; };
+		6DFB1BF11B8C634600514523 /* TweetDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BF01B8C634600514523 /* TweetDataModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,10 @@
 		6DFB1BE01B8C4C6A00514523 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6DFB1BE91B8C5C1E00514523 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		6DFB1BEA1B8C5C1E00514523 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
+		6DFB1BEC1B8C62F200514523 /* HttpNetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpNetworkModel.h; sourceTree = "<group>"; };
+		6DFB1BED1B8C62F200514523 /* HttpNetworkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpNetworkModel.m; sourceTree = "<group>"; };
+		6DFB1BEF1B8C634600514523 /* TweetDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetDataModel.h; sourceTree = "<group>"; };
+		6DFB1BF01B8C634600514523 /* TweetDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetDataModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +168,10 @@
 		6DFB1BE51B8C4D0800514523 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6DFB1BEC1B8C62F200514523 /* HttpNetworkModel.h */,
+				6DFB1BED1B8C62F200514523 /* HttpNetworkModel.m */,
+				6DFB1BEF1B8C634600514523 /* TweetDataModel.h */,
+				6DFB1BF01B8C634600514523 /* TweetDataModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -292,10 +302,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DFB1BEE1B8C62F200514523 /* HttpNetworkModel.m in Sources */,
 				6DFB1BBF1B8C4B3000514523 /* MainViewController.m in Sources */,
 				6DFB1BEB1B8C5C1E00514523 /* SearchTableViewCell.m in Sources */,
 				6DFB1BBC1B8C4B3000514523 /* AppDelegate.m in Sources */,
 				6DFB1BB91B8C4B3000514523 /* main.m in Sources */,
+				6DFB1BF11B8C634600514523 /* TweetDataModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
