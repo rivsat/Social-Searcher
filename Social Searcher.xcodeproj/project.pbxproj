@@ -55,6 +55,7 @@
 		6DFB1BED1B8C62F200514523 /* HttpNetworkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpNetworkModel.m; sourceTree = "<group>"; };
 		6DFB1BEF1B8C634600514523 /* TweetDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetDataModel.h; sourceTree = "<group>"; };
 		6DFB1BF01B8C634600514523 /* TweetDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetDataModel.m; sourceTree = "<group>"; };
+		6DFB1BF21B8D5B0400514523 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +189,7 @@
 		6DFB1BE71B8C4DC900514523 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6DFB1BF21B8D5B0400514523 /* Constants.h */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";

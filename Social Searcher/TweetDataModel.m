@@ -10,4 +10,21 @@
 
 @implementation TweetDataModel
 
+/**
+ * Add a data point to the data source.
+ * (Removes the oldest data point if the data source contains kMaxDataPoints objects.)
+ *
+ * @param aDataPoint An instance of ABCDataPoint.
+ * @return The oldest data point, if any.
+ */
+-(void) test
+{
+    @try {
+        
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception in :: . Details: %@",exception.description);
+    }
+}
+
 @end

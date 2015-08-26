@@ -10,4 +10,8 @@
 
 @interface TweetDataModel : NSObject
 
+@property (nonatomic, copy) NSString *author;
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) NSString *profileImageUrl;
+
 @end
