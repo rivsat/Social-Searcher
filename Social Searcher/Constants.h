@@ -13,6 +13,6 @@
 //
 
 static NSString * const kUrlSearchTweets = @"https://api.twitter.com/1.1/search/tweets.json";
-static NSString * const kCountMaxTweetResults = @"20";
+static NSString * const kCountMaxTweetResults = @"10";
 static NSString * const kBoolIncludeEntities = @"1";
 static NSString * const kResultType = @"mixed";

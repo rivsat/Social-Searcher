@@ -27,4 +27,17 @@
     }
 }
 
+-(TweetDataModel *) initWithValues: (NSString *) name screenName:(NSString *) displayName tweetText:(NSString *) text profileImage:(NSString *) imageUrl creationDate:(NSString *) tweetDate
+{
+    self = [super init];
+    if (self)
+    {
+        self.author = name;
+        self.displayName = displayName;
+        self.text = text;
+        self.profileImageUrl = imageUrl;
+        self.tweetDate = tweetDate;
+    }
+    return self;
+}
 @end

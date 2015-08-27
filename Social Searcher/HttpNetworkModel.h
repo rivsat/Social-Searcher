@@ -13,14 +13,14 @@
 
 @protocol HttpNetworkModelDelegate <NSObject>
 
-    -(void) httpNetworkModel:(HttpNetworkModel *)networkModel didFinishLoadingData: (NSArray *) resultsArray;
+-(void) httpNetworkModel:(HttpNetworkModel *)networkModel didFinishLoadingData: (NSArray *) resultsArray withMetaData:(NSDictionary *) searchMetaData;
 
 @end
 
 @interface HttpNetworkModel : NSObject
 
-    @property (nonatomic, retain) id <HttpNetworkModelDelegate> delegate;
+@property (nonatomic, retain) id <HttpNetworkModelDelegate> delegate;
 
-    -(void) performTwitterSearch:(NSString *) searchText;
+-(void) performTwitterSearch:(NSString *) searchText withMetaData:(NSDictionary *) searchMetaData;
 
 @end

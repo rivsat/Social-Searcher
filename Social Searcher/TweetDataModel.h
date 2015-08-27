@@ -11,7 +11,10 @@
 @interface TweetDataModel : NSObject
 
 @property (nonatomic, copy) NSString *author;
+@property (nonatomic, copy) NSString *displayName;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) NSString *profileImageUrl;
+@property (nonatomic, copy) NSString *tweetDate;
 
+-(TweetDataModel *) initWithValues: (NSString *) name screenName:(NSString *) displayName tweetText:(NSString *) text profileImage:(NSString *) imageUrl creationDate:(NSString *) tweetDate;
 @end
