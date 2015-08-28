@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TweetDataModel.h"
+
+#define kBorderWidth 1.0
+#define kCornerRadius 0.0
 
 @interface SearchTableViewCell : UITableViewCell
 
@@ -18,7 +22,10 @@
 @property (nonatomic, weak) IBOutlet UILabel* displayNameLabel;
 //Tweet Text
 @property (nonatomic, weak) IBOutlet UITextView* tweetTextView;
+//Tweet Time
+@property (nonatomic, weak) IBOutlet UILabel* timeLabel;
 
-
++ (CGFloat)heightForTweet:(TweetDataModel *)tweet;
++(UIFont *) getFontType;
 
 @end

@@ -16,5 +16,7 @@ UIScrollViewDelegate, HttpNetworkModelDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *querySearchBar;
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 
+@property (retain, nonatomic) UIActivityIndicatorView *activityIndicator;
+
 @end
 
