@@ -11,6 +11,7 @@
 #import "SearchTableViewCell.h"
 #import "AccountManager.h"
 #import "Reachability.h"
+#import "Constants.h"
 
 @interface MainViewController ()
 
@@ -150,7 +151,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.noMoreResultsAvail = NO;
-    [_resultsTableView setHidden:YES];
+    ///[_resultsTableView setHidden:YES];
     _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _activityIndicator.frame = CGRectMake(_resultsTableView.frame.origin.x,
                                               _resultsTableView.frame.origin.y,
@@ -201,14 +202,17 @@
                     [_httpNetworkModel performTwitterSearch:_searchText withMetaData:nil];
                 }
                 else {
+                    //dismiss the keyboard
+                    [_querySearchBar resignFirstResponder];
+
                     //Show Alert
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Twitter Search"
                                                                         message:@"No Twitter account found on your device. To configure Twitter, select Settings and choose Twitter."
-                                                                       delegate:nil
-                                                              cancelButtonTitle:@"OK"
-                                                              otherButtonTitles:nil];
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"Cancel"
+                                                              otherButtonTitles:@"Settings", nil];
                     [alertView show];
-
+                    
                 }
             }); //END BLOCK#2
             
@@ -218,11 +222,29 @@
         //Show Alert
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Twitter Search"
                                                             message:@"No internet connection. This app requires internet to search keywords in Twitter."
-                                                           delegate:nil
+                                                           delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
         [alertView show];
 
+    }
+}
+
+//delegate to handle Yes / No of Alert Message
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if([title isEqualToString:@"Cancel"]) {
+        NSLog(@"Cancel was selected.");
+    }
+    else if([title isEqualToString:@"Settings"]) {
+        NSLog(@"Settings was selected.");
+        if(UIApplicationOpenSettingsURLString != nil)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }
+        
     }
 }
 
@@ -240,9 +262,18 @@
         cell = [[SearchTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
+    cell.timeLabel.text = [self getDisplayTime:tweet.tweetDate];
     cell.nameLabel.text = tweet.author;
     //prepend @ to the display name
     cell.displayNameLabel.text = [NSString stringWithFormat:@"@%@", tweet.displayName];
+    
+    CGFloat height = [self heightOfTextViewWithString:tweet.text withFont:[UIFont fontWithName:@"Helvetica" size:13.0]andFixedWidth:250];
+    CGRect rect = CGRectMake(cell.tweetTextView.frame.origin.x, cell.tweetTextView.frame.origin.y, cell.tweetTextView.frame.size.width, height);
+    cell.tweetTextView.frame = rect;
+    NSLog(@"BEFORE cell.tweetTextView.contentSize=%f %f",cell.tweetTextView.contentSize.width, cell.tweetTextView.contentSize.height);
+    cell.tweetTextView.contentSize = CGSizeMake(cell.tweetTextView.frame.size.width, cell.tweetTextView.frame.size.height);
+    NSLog(@"AFTER cell.tweetTextView.contentSize=%f %f",cell.tweetTextView.contentSize.width, cell.tweetTextView.contentSize.height);
+    
     cell.tweetTextView.text = tweet.text;
     
     UIImage *img = [self loadImageFromCache:indexPath];
@@ -262,43 +293,29 @@
     return cell;
 }
 
+- (CGFloat)heightOfTextViewWithString:(NSString *)string
+                             withFont:(UIFont *)font
+                        andFixedWidth:(CGFloat)fixedWidth
+{
+    UITextView *tempTV = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, fixedWidth, 1)];
+    tempTV.text = [string uppercaseString];
+    tempTV.font = font;
+    
+    CGSize newSize = [tempTV sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = tempTV.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    tempTV.frame = newFrame;
+    
+    return tempTV.frame.size.height + kCellUITextMargin;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-   TweetDataModel *tweet = [self.tweetResultsArray objectAtIndex:indexPath.row];
-    return [SearchTableViewCell heightForTweet:tweet];
-     */
-     static SearchTableViewCell *sizingCell;
-     static NSString *cellIdentifier = @"SearchResultCell";
-     static dispatch_once_t onceToken;
-     // 1
-     dispatch_once(&onceToken, ^{
-     sizingCell = [[SearchTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-     });
-     
-     // 2
     TweetDataModel *tweet = [self.tweetResultsArray objectAtIndex:indexPath.row];
-    
-     // 3
-     CGFloat (^calcCellHeight)(SearchTableViewCell *, NSString *) = ^ CGFloat(SearchTableViewCell *sizingCell, NSString *labelText){
-     
-     sizingCell.tweetTextView.text = labelText;
-     
-     return [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
-     };    
-     
-     // 4
-     CGFloat cellHeight = calcCellHeight(sizingCell, tweet.text);
-    if ([tweet.text length] > 80) {
-         cellHeight += 50; //top & bottom margins
-    }
-    
-    CGFloat kMinCellHeight = (float)70;
-     // 5
-     return (cellHeight < kMinCellHeight ? kMinCellHeight : cellHeight);
+    CGFloat cellHeight = [self heightOfTextViewWithString:tweet.text withFont:[UIFont fontWithName:@"Helvetica" size:13.0]andFixedWidth:250];
+    cellHeight += kCellVerticalMargin;
+    return (cellHeight < kCellMinHeight ? kCellMinHeight : cellHeight);;
 }
-
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -435,6 +452,10 @@
     }
 }
 
-
+#pragma mark Time parsing method
+-(NSString *) getDisplayTime: (NSString *) tweetTime
+{
+    return tweetTime;
+}
 
 @end

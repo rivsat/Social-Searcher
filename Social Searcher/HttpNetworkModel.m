@@ -162,7 +162,7 @@
                         NSLog(@"*******************************************************************");
                         NSLog(@"Tweet Data. Date:%@\nName: %@\nScreen Name: @%@\nText:%@\nProfile Img:%@", tweet[@"created_at"], tweet[@"user"][@"name"], tweet[@"user"][@"screen_name"], tweet[@"text"], tweet[@"user"][@"profile_image_url"]);
                         
-                        TweetDataModel *dataModel = [[TweetDataModel alloc] initWithValues:tweet[@"user"][@"name"] screenName:tweet[@"user"][@"screen_name"] tweetText:tweet[@"text"] profileImage:tweet[@"user"][@"profile_image_url"] creationDate:tweet[@"created_date"]];
+                        TweetDataModel *dataModel = [[TweetDataModel alloc] initWithValues:tweet[@"user"][@"name"] screenName:tweet[@"user"][@"screen_name"] tweetText:tweet[@"text"] profileImage:tweet[@"user"][@"profile_image_url"] creationDate:tweet[@"created_at"]];
                         
                         //keep stuffing in resultsArray
                         [resutsArray addObject:dataModel];

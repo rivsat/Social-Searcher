@@ -10,7 +10,7 @@
 #import "HttpNetworkModel.h"
 
 @interface MainViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate,
-UIScrollViewDelegate, HttpNetworkModelDelegate>
+UIScrollViewDelegate, UIAlertViewDelegate, HttpNetworkModelDelegate>
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *mainNavigationBar;
 @property (weak, nonatomic) IBOutlet UISearchBar *querySearchBar;

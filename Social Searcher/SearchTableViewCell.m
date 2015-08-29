@@ -25,6 +25,7 @@
     [borderLayer setBorderWidth:kBorderWidth];
     [borderLayer setBorderColor:[[UIColor grayColor] CGColor]];
     [_profileImage.layer addSublayer:borderLayer];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -41,6 +42,9 @@
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.textLabel.numberOfLines = 0;
         self.textLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.tweetTextView sizeToFit]; //added
+        [self.tweetTextView layoutIfNeeded]; //added
+
     }
     
     return self;
