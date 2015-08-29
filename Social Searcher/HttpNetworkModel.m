@@ -83,6 +83,10 @@
                 });
                 
             }
+            else {
+                //Twitter a/c not setup on iPhone
+                
+            }
 
         }];//END BLOCK#1
     }
@@ -132,120 +136,6 @@
         });
     }
 }
-/*
-- (void)searchTweetsVer2: (NSString *) searchText
-{
-    @try {
-        ACAccountStore *account = [[ACAccountStore alloc] init];
-        ACAccountType *accountType = [account
-                                      accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-        
-        [account requestAccessToAccountsWithType:accountType
-                                         options:nil completion:^(BOOL granted, NSError *error)
-         {
-             if (granted == YES)
-             {
-                 NSArray *arrayOfAccounts = [account
-                                             accountsWithAccountType:accountType];
-                 
-                 if ([arrayOfAccounts count] > 0)
-                 {
-                     ACAccount *twitterAccount = [arrayOfAccounts lastObject];
-                     
-                     NSURL *requestURL = [NSURL URLWithString:kUrlSearchTweets];
-                     
-                     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-                     [parameters setObject:kCountMaxTweetResults forKey:@"count"];
-                     [parameters setObject:kBoolIncludeEntities forKey:@"include_entities"];
-                     [parameters setValue:kResultType forKey:@"result_type"];
-                     [parameters setValue:searchText forKey:@"q"];
-                     
-                     SLRequest *postRequest = [SLRequest
-                                               requestForServiceType:SLServiceTypeTwitter
-                                               requestMethod:SLRequestMethodGET
-                                               URL:requestURL parameters:parameters];
-                     
-                     postRequest.account = twitterAccount;
-                     
-                     [postRequest performRequestWithHandler:
-                      ^(NSData *responseData, NSHTTPURLResponse
-                        *urlResponse, NSError *error)
-                      {
-                          NSDictionary *tweetData = [NSJSONSerialization
-                                                     JSONObjectWithData:responseData
-                                                     options:NSJSONReadingMutableLeaves
-                                                     error:&error];
-                          
-                          //parse the search results and populate the tweet data model
-                          dispatch_async(dispatch_get_main_queue(), ^{
-                              NSLog(@"Tweet Search Results: %@",tweetData);
-                              [self populateTweetDataModel:tweetData];
-                          });
-                      }];
-                 }
-             } else {
-                 // Handle failure to get account access
-             }
-         }];
-    }
-    
-    @catch (NSException *exception) {
-        NSLog(@"Exception in HttpNetworkModel::performTwitterSearch . Details: %@",exception.description);
-        //parse the search results and populate the tweet data model
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self populateTweetDataModel:@{}];
-        });
-    }
-}
-- (void)searchTweetsVer3: (NSString *) searchText
-{
-    @try {
-        
-        ACAccount *twitterAccount = [AccountManager getTwitterAccount];
-        if (twitterAccount)
-        {
-            NSURL *requestURL = [NSURL URLWithString:kUrlSearchTweets];
-            
-            NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-            [parameters setObject:kCountMaxTweetResults forKey:@"count"];
-            [parameters setObject:kBoolIncludeEntities forKey:@"include_entities"];
-            [parameters setValue:kResultType forKey:@"result_type"];
-            [parameters setValue:searchText forKey:@"q"];
-            
-            SLRequest *postRequest = [SLRequest
-                                      requestForServiceType:SLServiceTypeTwitter
-                                      requestMethod:SLRequestMethodGET
-                                      URL:requestURL parameters:parameters];
-            
-            postRequest.account = twitterAccount;
-            
-            [postRequest performRequestWithHandler:
-             ^(NSData *responseData, NSHTTPURLResponse
-               *urlResponse, NSError *error)
-             {
-                 NSDictionary *tweetData = [NSJSONSerialization
-                                            JSONObjectWithData:responseData
-                                            options:NSJSONReadingMutableLeaves
-                                            error:&error];
-                 
-                 //parse the search results and populate the tweet data model
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     NSLog(@"Tweet Search Results: %@",tweetData);
-                     [self populateTweetDataModel:tweetData];
-                 });
-             }];
-            
-        }
-    }
-    @catch (NSException *exception) {
-        NSLog(@"Exception in HttpNetworkModel::performTwitterSearch . Details: %@",exception.description);
-        //parse the search results and populate the tweet data model
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self populateTweetDataModel:@{}];
-        });
-    }
-}
-*/
 
 /**
  * Parses the search results tweetData and populates TweetDataModel objects in an array

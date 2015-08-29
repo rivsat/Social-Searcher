@@ -31,8 +31,16 @@
                      twitterAccount.accountType = accountType; //Twitter
                      completionHandler(twitterAccount);
                  }
-             } else {
+                 else {
+                     //No Twitter a/c found. So need to setup one here
+                     // Handle failure to get account access
+                     completionHandler(nil);
+                 }
+             }
+             else {
+                 //No Twitter a/c found. So need to setup one here
                  // Handle failure to get account access
+                 completionHandler(nil);
              }
          }];
     }

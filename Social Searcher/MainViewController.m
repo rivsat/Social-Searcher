@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import "TweetDataModel.h"
 #import "SearchTableViewCell.h"
+#import "AccountManager.h"
+#import "Reachability.h"
 
 @interface MainViewController ()
 
@@ -20,10 +22,16 @@
 @property (nonatomic, strong) NSString *searchText;
 @property (nonatomic, strong) NSMutableDictionary *searchMetaData;
 
+@property (nonatomic, retain) Reachability *internetReachable;
+@property (nonatomic, retain) Reachability *hostReachable;
 
+@property BOOL internetActive;
+@property BOOL hostActive;
 @end
 
 @implementation MainViewController
+
+
 /**
  * Add a data point to the data source.
  * (Removes the oldest data point if the data source contains kMaxDataPoints objects.)
@@ -55,9 +63,80 @@
         _imageCacheArray =  [[NSMutableArray alloc] init];
         _searchText = [[NSString alloc] init];
         _searchMetaData = [[NSMutableDictionary alloc] init];
+        
+        //Initialise the internet reachablility observer
+        // check for internet connection
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
+        
+        _internetReachable = [Reachability reachabilityForInternetConnection];
+        [_internetReachable startNotifier];
+        
+        // check if a pathway to a random host exists
+        _hostReachable = [Reachability reachabilityWithHostName:@"www.apple.com"];
+        [_hostReachable startNotifier];
+
     }
     return self;
 }
+
+//>
+-(BOOL) checkNetworkStatus:(NSNotification *)notice
+{
+    // called after network status changes
+    NetworkStatus internetStatus = [_internetReachable currentReachabilityStatus];
+    switch (internetStatus)
+    {
+        case NotReachable:
+        {
+            NSLog(@"The internet is down.");
+            self.internetActive = NO;
+            
+            break;
+        }
+        case ReachableViaWiFi:
+        {
+            NSLog(@"The internet is working via WIFI.");
+            self.internetActive = YES;
+            
+            break;
+        }
+        case ReachableViaWWAN:
+        {
+            NSLog(@"The internet is working via WWAN.");
+            self.internetActive = YES;
+            
+            break;
+        }
+    }
+    
+    NetworkStatus hostStatus = [_hostReachable currentReachabilityStatus];
+    switch (hostStatus)
+    {
+        case NotReachable:
+        {
+            NSLog(@"A gateway to the host server is down.");
+            self.hostActive = NO;
+            
+            break;
+        }
+        case ReachableViaWiFi:
+        {
+            NSLog(@"A gateway to the host server is working via WIFI.");
+            self.hostActive = YES;
+            
+            break;
+        }
+        case ReachableViaWWAN:
+        {
+            NSLog(@"A gateway to the host server is working via WWAN.");
+            self.hostActive = YES;
+            break;
+        }
+    }
+    
+    return (self.hostActive || self.internetActive);
+}
+//<
 
 //Boiler-plate code dealloc. Dealloc your objects here.
 - (void)dealloc
@@ -95,21 +174,56 @@
  * @param aSearchBar An instance of UISearchBar.
  * @return void
  */
-- (void)searchBarSearchButtonClicked:(UISearchBar *) aSearchBar {
-    _searchText = _querySearchBar.text;
-    //dismiss the keyboard
-    [_querySearchBar resignFirstResponder];
-    
-    [_activityIndicator startAnimating];
-    
-    // reset data structures and reload table.
-    [_tweetResultsArray removeAllObjects];
-    [_imageCacheArray removeAllObjects];
-    [_searchMetaData removeAllObjects];
-    [_resultsTableView reloadData];
+- (void)searchBarSearchButtonClicked:(UISearchBar *) aSearchBar
+{
+    //Check for internet connectivity
+    if ([self checkNetworkStatus:nil])
+    {
+        //BLOCK#1
+        [AccountManager getTwitterAccount:^(ACAccount *accTwitter){
+            
+            //BLOCK#2
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (accTwitter) {
+                    _searchText = _querySearchBar.text;
+                    //dismiss the keyboard
+                    [_querySearchBar resignFirstResponder];
+                    
+                    [_activityIndicator startAnimating];
+                    
+                    // reset data structures and reload table.
+                    [_tweetResultsArray removeAllObjects];
+                    [_imageCacheArray removeAllObjects];
+                    [_searchMetaData removeAllObjects];
+                    [_resultsTableView reloadData];
+                    
+                    //Since this is a fresh search there's no meta data
+                    [_httpNetworkModel performTwitterSearch:_searchText withMetaData:nil];
+                }
+                else {
+                    //Show Alert
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Twitter Search"
+                                                                        message:@"No Twitter account found on your device. To configure Twitter, select Settings and choose Twitter."
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
 
-    //Since this is a fresh search there's no meta data
-    [_httpNetworkModel performTwitterSearch:_searchText withMetaData:nil];
+                }
+            }); //END BLOCK#2
+            
+        }];//END BLOCK#1
+    }
+    else {
+        //Show Alert
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Twitter Search"
+                                                            message:@"No internet connection. This app requires internet to search keywords in Twitter."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+
+    }
 }
 
 #pragma mark - TableView data source
@@ -176,9 +290,11 @@
      
      // 4
      CGFloat cellHeight = calcCellHeight(sizingCell, tweet.text);
-    cellHeight += 30; //top & bottom margins
+    if ([tweet.text length] > 80) {
+         cellHeight += 50; //top & bottom margins
+    }
     
-    CGFloat kMinCellHeight = (float)100;
+    CGFloat kMinCellHeight = (float)70;
      // 5
      return (cellHeight < kMinCellHeight ? kMinCellHeight : cellHeight);
 }
@@ -222,10 +338,10 @@
         //NSLog(@"Calling searchTweets with request: %@\nParams:%@",requestURL, parameters);
         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
         UIImage *image = [UIImage imageWithData:imageData];
-        [_imageCacheArray addObject:image];
         
         //Update the UI on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
+            [_imageCacheArray addObject:image];
             SearchTableViewCell *cell = (SearchTableViewCell *)[_resultsTableView cellForRowAtIndexPath:indexPath];
             NSLog(@"In getImageData, displaying profileImage for row: %ld",indexPath.row);
             cell.profileImage.image = image;
@@ -290,6 +406,7 @@
         }
     }
     @catch (NSException *exception) {
+        [_activityIndicator stopAnimating];
         NSLog(@"Exception in httpNetworkModel::didFinishLoadingData. Details: %@", exception.description);
     }
 }

@@ -22,6 +22,9 @@
 		6DFB1BF11B8C634600514523 /* TweetDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BF01B8C634600514523 /* TweetDataModel.m */; };
 		6DFB1BF71B8D766200514523 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BF61B8D766200514523 /* AccountManager.m */; };
 		6DFB1BFA1B8F05F100514523 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFB1BF91B8F05F100514523 /* Default.png */; };
+		6DFB1BFC1B9054C200514523 /* SearchBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFB1BFB1B9054C200514523 /* SearchBg.png */; };
+		6DFB1BFE1B90568700514523 /* twitterImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFB1BFD1B90568700514523 /* twitterImg.png */; };
+		6DFB1C021B9091EB00514523 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1C011B9091EB00514523 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,10 @@
 		6DFB1BF51B8D766200514523 /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
 		6DFB1BF61B8D766200514523 /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
 		6DFB1BF91B8F05F100514523 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
+		6DFB1BFB1B9054C200514523 /* SearchBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SearchBg.png; path = Images/SearchBg.png; sourceTree = "<group>"; };
+		6DFB1BFD1B90568700514523 /* twitterImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitterImg.png; path = Images/twitterImg.png; sourceTree = "<group>"; };
+		6DFB1C001B9091EB00514523 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6DFB1C011B9091EB00514523 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +201,8 @@
 		6DFB1BE71B8C4DC900514523 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6DFB1C001B9091EB00514523 /* Reachability.h */,
+				6DFB1C011B9091EB00514523 /* Reachability.m */,
 				6DFB1BF21B8D5B0400514523 /* Constants.h */,
 				6DFB1BF51B8D766200514523 /* AccountManager.h */,
 				6DFB1BF61B8D766200514523 /* AccountManager.m */,
@@ -215,6 +224,8 @@
 		6DFB1BF81B8F05E000514523 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6DFB1BFD1B90568700514523 /* twitterImg.png */,
+				6DFB1BFB1B9054C200514523 /* SearchBg.png */,
 				6DFB1BF91B8F05F100514523 /* Default.png */,
 			);
 			name = Images;
@@ -301,7 +312,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DFB1BC21B8C4B3000514523 /* Main.storyboard in Resources */,
+				6DFB1BFC1B9054C200514523 /* SearchBg.png in Resources */,
 				6DFB1BC71B8C4B3000514523 /* LaunchScreen.xib in Resources */,
+				6DFB1BFE1B90568700514523 /* twitterImg.png in Resources */,
 				6DFB1BC41B8C4B3000514523 /* Images.xcassets in Resources */,
 				6DFB1BFA1B8F05F100514523 /* Default.png in Resources */,
 			);
@@ -323,6 +336,7 @@
 			files = (
 				6DFB1BEE1B8C62F200514523 /* HttpNetworkModel.m in Sources */,
 				6DFB1BBF1B8C4B3000514523 /* MainViewController.m in Sources */,
+				6DFB1C021B9091EB00514523 /* Reachability.m in Sources */,
 				6DFB1BEB1B8C5C1E00514523 /* SearchTableViewCell.m in Sources */,
 				6DFB1BF71B8D766200514523 /* AccountManager.m in Sources */,
 				6DFB1BBC1B8C4B3000514523 /* AppDelegate.m in Sources */,
