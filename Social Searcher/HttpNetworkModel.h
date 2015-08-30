@@ -14,6 +14,7 @@
 @protocol HttpNetworkModelDelegate <NSObject>
 
 -(void) httpNetworkModel:(HttpNetworkModel *)networkModel didFinishLoadingData: (NSArray *) resultsArray withMetaData:(NSDictionary *) searchMetaData;
+-(void) didReceiveImageData:(NSData *)imageData forRow:(NSIndexPath *)indexPath;
 
 @end
 
@@ -22,5 +23,6 @@
 @property (nonatomic, retain) id <HttpNetworkModelDelegate> delegate;
 
 -(void) performTwitterSearch:(NSString *) searchText withMetaData:(NSDictionary *) searchMetaData;
+-(void) getImageData:(NSIndexPath *)indexPath forUrl:(NSString *)imageUrl;
 
 @end

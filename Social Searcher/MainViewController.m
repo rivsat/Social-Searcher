@@ -12,6 +12,7 @@
 #import "AccountManager.h"
 #import "Reachability.h"
 #import "Constants.h"
+#import "Utility.h"
 
 @interface MainViewController ()
 
@@ -151,13 +152,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.noMoreResultsAvail = NO;
-    ///[_resultsTableView setHidden:YES];
+    [_resultsTableView setHidden:YES];
     _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _activityIndicator.frame = CGRectMake(_resultsTableView.frame.origin.x,
                                               _resultsTableView.frame.origin.y,
                                               _resultsTableView.frame.size.width,
                                               _resultsTableView.frame.size.height);
     [self.view addSubview:_activityIndicator];
+    //[self getDisplayTime:@"Sat Aug 29 06:42:56 +0000 2015"];
 }
 
 //Boiler-plate code didReceiveMemoryWarning. Release memory of your objects here.
@@ -178,8 +180,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *) aSearchBar
 {
     //Check for internet connectivity
-    if ([self checkNetworkStatus:nil])
-    {
+    if ([self checkNetworkStatus:nil]) {
         //BLOCK#1
         [AccountManager getTwitterAccount:^(ACAccount *accTwitter){
             
@@ -226,7 +227,6 @@
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
         [alertView show];
-
     }
 }
 
@@ -240,11 +240,9 @@
     }
     else if([title isEqualToString:@"Settings"]) {
         NSLog(@"Settings was selected.");
-        if(UIApplicationOpenSettingsURLString != nil)
-        {
+        if(UIApplicationOpenSettingsURLString != nil) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }
-        
     }
 }
 
@@ -257,12 +255,11 @@
                                       dequeueReusableCellWithIdentifier:cellIdentifier];
     TweetDataModel *tweet = [self.tweetResultsArray objectAtIndex:indexPath.row];
 
-    if(cell == nil){
-        
+    if(cell == nil) {
         cell = [[SearchTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    cell.timeLabel.text = [self getDisplayTime:tweet.tweetDate];
+    cell.timeLabel.text = [Utility getDisplayTime:tweet.tweetDate];
     cell.nameLabel.text = tweet.author;
     //prepend @ to the display name
     cell.displayNameLabel.text = [NSString stringWithFormat:@"@%@", tweet.displayName];
@@ -270,10 +267,8 @@
     CGFloat height = [self heightOfTextViewWithString:tweet.text withFont:[UIFont fontWithName:@"Helvetica" size:13.0]andFixedWidth:250];
     CGRect rect = CGRectMake(cell.tweetTextView.frame.origin.x, cell.tweetTextView.frame.origin.y, cell.tweetTextView.frame.size.width, height);
     cell.tweetTextView.frame = rect;
-    NSLog(@"BEFORE cell.tweetTextView.contentSize=%f %f",cell.tweetTextView.contentSize.width, cell.tweetTextView.contentSize.height);
     cell.tweetTextView.contentSize = CGSizeMake(cell.tweetTextView.frame.size.width, cell.tweetTextView.frame.size.height);
-    NSLog(@"AFTER cell.tweetTextView.contentSize=%f %f",cell.tweetTextView.contentSize.width, cell.tweetTextView.contentSize.height);
-    
+
     cell.tweetTextView.text = tweet.text;
     
     UIImage *img = [self loadImageFromCache:indexPath];
@@ -282,9 +277,8 @@
     }
     else {
         // download only if the tableView is stationary
-        if (self.resultsTableView.dragging == NO && self.resultsTableView.decelerating == NO)
-        {
-            [self getImageData:indexPath forUrl:tweet.profileImageUrl];
+        if (self.resultsTableView.dragging == NO && self.resultsTableView.decelerating == NO) {
+            [_httpNetworkModel getImageData:indexPath forUrl:tweet.profileImageUrl];
         }
         // if a download is in progress, show a default image
         cell.profileImage.image = [UIImage imageNamed:@"Default.png"];        
@@ -321,8 +315,7 @@
 {
     if (_tweetResultsArray != nil) {
         return _tweetResultsArray.count;
-    }
-    else {
+    } else {
         return 0;
     }
 }
@@ -347,24 +340,6 @@
     }
 }
 
-//Download image from Url and store to imageCache
--(void) getImageData:(NSIndexPath *)indexPath forUrl:(NSString *)imageUrl
-{
-    //Fetch image data async on the global thread
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        //NSLog(@"Calling searchTweets with request: %@\nParams:%@",requestURL, parameters);
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
-        UIImage *image = [UIImage imageWithData:imageData];
-        
-        //Update the UI on the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_imageCacheArray addObject:image];
-            SearchTableViewCell *cell = (SearchTableViewCell *)[_resultsTableView cellForRowAtIndexPath:indexPath];
-            NSLog(@"In getImageData, displaying profileImage for row: %ld",indexPath.row);
-            cell.profileImage.image = image;
-        });
-    });
-}
 
 // -------------------------------------------------------------------------------
 //	loadImagesForOnscreenRows
@@ -382,7 +357,7 @@
             if (_imageCacheArray.count <= indexPath.row) {
                 NSLog(@"In loadImagesForOnscreenRows, getting profileImage for row: %ld",indexPath.row);
                 TweetDataModel *tweet = [self.tweetResultsArray objectAtIndex:indexPath.row];
-                [self getImageData:indexPath forUrl:tweet.profileImageUrl];
+                [_httpNetworkModel getImageData:indexPath forUrl:tweet.profileImageUrl];
             }
             else {
                 SearchTableViewCell *cell = (SearchTableViewCell *)[_resultsTableView cellForRowAtIndexPath:indexPath];
@@ -424,10 +399,28 @@
     }
     @catch (NSException *exception) {
         [_activityIndicator stopAnimating];
-        NSLog(@"Exception in httpNetworkModel::didFinishLoadingData. Details: %@", exception.description);
+        NSLog(@"Exception in MainViewController::didFinishLoadingData. Details: %@", exception.description);
     }
 }
 
+//Delegate called when image data is downloaded from Url. Store to imageCache
+//NOTE: HttpNetwrorModel already calls this delegate on the main thread so update the UI directly.
+-(void) didReceiveImageData:(NSData *)imageData forRow:(NSIndexPath *)indexPath
+{
+    @try {
+        UIImage *image = [UIImage imageWithData:imageData];
+        
+        //Update the UI as we are on the main thread
+        [_imageCacheArray addObject:image];
+        SearchTableViewCell *cell = (SearchTableViewCell *)[_resultsTableView cellForRowAtIndexPath:indexPath];
+        NSLog(@"In didReceiveImageData, displaying profileImage for row: %ld",indexPath.row);
+        cell.profileImage.image = image;
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception in MainViewController::didReceiveImageData. Details: %@", exception.description);
+    }
+    
+}
 #pragma mark - UIScrollViewDelegate
 
 // -------------------------------------------------------------------------------
@@ -452,10 +445,5 @@
     }
 }
 
-#pragma mark Time parsing method
--(NSString *) getDisplayTime: (NSString *) tweetTime
-{
-    return tweetTime;
-}
 
 @end

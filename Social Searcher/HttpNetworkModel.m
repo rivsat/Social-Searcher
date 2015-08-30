@@ -179,6 +179,27 @@
 }
 
 /**
+ * Download image from Url and calls delegate to update the UI
+ *
+ * @param inputString indexPath of table row and imageUrl
+ * @return calls delegate didReceiveImageData on main thread
+ */
+
+-(void) getImageData:(NSIndexPath *)indexPath forUrl:(NSString *)imageUrl
+{
+    //Fetch image data async on the global thread
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        //NSLog(@"Calling searchTweets with request: %@\nParams:%@",requestURL, parameters);
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
+        
+        //Call the delegate on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate didReceiveImageData:imageData forRow:indexPath];
+        });
+    });
+}
+
+/**
  * Performs a URL encoding of the query
  *
  * @param inputString The query string to be encoded
@@ -196,6 +217,7 @@
         return inputString;
     }
 }
+
 
 
 @end
