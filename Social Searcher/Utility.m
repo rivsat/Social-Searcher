@@ -25,4 +25,24 @@
     return dateString;
 }
 
+/**
+ * Performs a URL encoding of the query
+ *
+ * @param inputString The query string to be encoded
+ * @return URL encoded string
+ */
++(NSString *)encodeQuery:(NSString *)inputString
+{
+    @try {
+        return [inputString
+                stringByAddingPercentEscapesUsingEncoding:
+                NSUTF8StringEncoding];
+        
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception in HttpNetworkModel::encodeQuery . Details: %@",exception.description);
+        return inputString;
+    }
+}
+
 @end

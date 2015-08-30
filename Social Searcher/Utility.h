@@ -11,5 +11,6 @@
 @interface Utility : NSObject
 
 +(NSString *) getDisplayTime: (NSString *) tweetTime;
++(NSString *)encodeQuery:(NSString *)inputString;
 
 @end
