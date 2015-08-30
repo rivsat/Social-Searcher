@@ -10,6 +10,12 @@
 
 @implementation AccountManager
 
+/**
+ * Retrieves the Twitter account configured on the user's device
+ *
+ * @param completionHandler block to handle task completion
+ * @return none
+ */
 +(void) getTwitterAccount:(void (^)(ACAccount *accTwitter))completionHandler
 {
     __block ACAccount *twitterAccount = [[ACAccount alloc] init];
@@ -47,38 +53,6 @@
     @catch (NSException *exception) {
         NSLog(@"Exception in AccountManager::getTwitterAccount . Details: %@",exception.description);
     }
-}
-
-+(ACAccount *) getTwitterAccountVer1
-{
-    __block ACAccount *twitterAccount = [[ACAccount alloc] init];
-    @try {
-        ACAccountStore *account = [[ACAccountStore alloc] init];
-        ACAccountType *accountType = [account
-                                      accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-        [account requestAccessToAccountsWithType:accountType
-                                         options:nil completion:^(BOOL granted, NSError *error)
-         {
-             if (granted == YES)
-             {
-                 NSArray *arrayOfAccounts = [account
-                                             accountsWithAccountType:accountType];
-                 
-                 if ([arrayOfAccounts count] > 0)
-                 {
-                     twitterAccount = [arrayOfAccounts lastObject];
-                     twitterAccount.accountType = accountType; //Twitter
-                 }
-             } else {
-                 // Handle failure to get account access
-             }
-         }];
-    }
-    @catch (NSException *exception) {
-        NSLog(@"Exception in AccountManager::getTwitterAccount . Details: %@",exception.description);
-        return nil;
-    }
-    return twitterAccount;
 }
 
 

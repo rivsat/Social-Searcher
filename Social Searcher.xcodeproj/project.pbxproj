@@ -165,8 +165,8 @@
 			children = (
 				6DFB1C051B91B77B00514523 /* MainViewControllerSpec.m */,
 				6DFB1BD21B8C4B3100514523 /* Social_SearcherTests.m */,
-				6DFB1BD01B8C4B3100514523 /* Supporting Files */,
 				6D6A98F11B929E1600925B31 /* TweetDataModelSpec.m */,
+				6DFB1BD01B8C4B3100514523 /* Supporting Files */,
 			);
 			path = "Social SearcherTests";
 			sourceTree = "<group>";

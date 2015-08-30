@@ -34,24 +34,8 @@
 @implementation MainViewController
 
 
-/**
- * Add a data point to the data source.
- * (Removes the oldest data point if the data source contains kMaxDataPoints objects.)
- *
- * @param aDataPoint An instance of ABCDataPoint.
- * @return The oldest data point, if any.
- */
--(void) test
-{
-    @try {
-        
-    }
-    @catch (NSException *exception) {
-        NSLog(@"Exception in :: . Details: %@",exception.description);
-    }
-}
-
-//Boiler-plate code initWithCoder. Initialise your objects here.
+//
+//initWithCoder. Initialise your objects here.
 -(id) initWithCoder:(NSCoder *)aDecoder
 {
     //We should give it a default value. The initWithCoder method is a good place for that.
@@ -81,72 +65,14 @@
     return self;
 }
 
-//>
--(BOOL) checkNetworkStatus:(NSNotification *)notice
-{
-    // called after network status changes
-    NetworkStatus internetStatus = [_internetReachable currentReachabilityStatus];
-    switch (internetStatus)
-    {
-        case NotReachable:
-        {
-            NSLog(@"The internet is down.");
-            self.internetActive = NO;
-            
-            break;
-        }
-        case ReachableViaWiFi:
-        {
-            NSLog(@"The internet is working via WIFI.");
-            self.internetActive = YES;
-            
-            break;
-        }
-        case ReachableViaWWAN:
-        {
-            NSLog(@"The internet is working via WWAN.");
-            self.internetActive = YES;
-            
-            break;
-        }
-    }
-    
-    NetworkStatus hostStatus = [_hostReachable currentReachabilityStatus];
-    switch (hostStatus)
-    {
-        case NotReachable:
-        {
-            NSLog(@"A gateway to the host server is down.");
-            self.hostActive = NO;
-            
-            break;
-        }
-        case ReachableViaWiFi:
-        {
-            NSLog(@"A gateway to the host server is working via WIFI.");
-            self.hostActive = YES;
-            
-            break;
-        }
-        case ReachableViaWWAN:
-        {
-            NSLog(@"A gateway to the host server is working via WWAN.");
-            self.hostActive = YES;
-            break;
-        }
-    }
-    
-    return (self.hostActive || self.internetActive);
-}
-//<
 
-//Boiler-plate code dealloc. Dealloc your objects here.
+//dealloc. Dealloc your objects here.
 - (void)dealloc
 {
     NSLog(@"dealloc MainViewController");
 }
 
-//Boiler-plate code viewDidLoad. Initialise your objects here.
+//viewDidLoad. Initialise your objects here.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -162,7 +88,7 @@
     //[self getDisplayTime:@"Sat Aug 29 06:42:56 +0000 2015"];
 }
 
-//Boiler-plate code didReceiveMemoryWarning. Release memory of your objects here.
+//didReceiveMemoryWarning. Release memory of your objects here.
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -246,7 +172,7 @@
     }
 }
 
-#pragma mark - TableView data source
+#pragma mark - TableView data source methods
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"In cellForRowAtIndexPath. Populating data for row: %ld",indexPath.row);
@@ -287,6 +213,14 @@
     return cell;
 }
 
+/**
+ * Calculate height of textView given the text
+ *
+ * @param string text to be displayed
+ * @param font font of the text to be displayed
+ * @param fixedWidth CGFloat of the font
+ * @return returns CGFloat size of the textView.
+ */
 - (CGFloat)heightOfTextViewWithString:(NSString *)string
                              withFont:(UIFont *)font
                         andFixedWidth:(CGFloat)fixedWidth
@@ -327,7 +261,12 @@
 
 #pragma mark - Image retrieval methods
 
-//Retrieve Image from local imageCache if available
+/**
+ * Retrieve Image from local imageCache if available
+ *
+ * @param indexPath index of the row for which image is required
+ * @return returns UIImage of the image OR nil if not available in the imageCache
+ */
 -(UIImage *) loadImageFromCache:(NSIndexPath *)indexPath
 {
     //check if we have it in our cache
@@ -341,11 +280,12 @@
 }
 
 
-// -------------------------------------------------------------------------------
-//	loadImagesForOnscreenRows
-//  This method is used in case the user scrolled into a set of cells that don't
-//  have their profile images yet.
-// -------------------------------------------------------------------------------
+/**
+ * This method is used in case the user scrolled into a set of cells that don't have their profile images yet.
+ *
+ * @param none
+ * @return none.
+ */
 - (void)loadImagesForOnscreenRows
 {
     if (_imageCacheArray.count > 0) {
@@ -403,8 +343,13 @@
     }
 }
 
-//Delegate called when image data is downloaded from Url. Store to imageCache
-//NOTE: HttpNetwrorModel already calls this delegate on the main thread so update the UI directly.
+/**
+ * HttpNetworkModel Delegate called when image data is downloaded from Url. Store to imageCache
+ * NOTE: HttpNetwrorModel already calls this delegate on the main thread so update the UI directly.
+ * @param imageData of the image
+ * @param indexPath of the row in tableView
+ * @return void
+ */
 -(void) didReceiveImageData:(NSData *)imageData forRow:(NSIndexPath *)indexPath
 {
     @try {
@@ -445,6 +390,65 @@
     }
 }
 
-#pragma mark Segue 
+#pragma mark Network reachability
+
+//Helper to check for network status
+-(BOOL) checkNetworkStatus:(NSNotification *)notice
+{
+    // called after network status changes
+    NetworkStatus internetStatus = [_internetReachable currentReachabilityStatus];
+    switch (internetStatus)
+    {
+        case NotReachable:
+        {
+            NSLog(@"The internet is down.");
+            self.internetActive = NO;
+            
+            break;
+        }
+        case ReachableViaWiFi:
+        {
+            NSLog(@"The internet is working via WIFI.");
+            self.internetActive = YES;
+            
+            break;
+        }
+        case ReachableViaWWAN:
+        {
+            NSLog(@"The internet is working via WWAN.");
+            self.internetActive = YES;
+            
+            break;
+        }
+    }
+    
+    NetworkStatus hostStatus = [_hostReachable currentReachabilityStatus];
+    switch (hostStatus)
+    {
+        case NotReachable:
+        {
+            NSLog(@"A gateway to the host server is down.");
+            self.hostActive = NO;
+            
+            break;
+        }
+        case ReachableViaWiFi:
+        {
+            NSLog(@"A gateway to the host server is working via WIFI.");
+            self.hostActive = YES;
+            
+            break;
+        }
+        case ReachableViaWWAN:
+        {
+            NSLog(@"A gateway to the host server is working via WWAN.");
+            self.hostActive = YES;
+            break;
+        }
+    }
+    
+    return (self.hostActive || self.internetActive);
+}
+//<
 
 @end

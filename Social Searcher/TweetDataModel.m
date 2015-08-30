@@ -11,22 +11,15 @@
 @implementation TweetDataModel
 
 /**
- * Add a data point to the data source.
- * (Removes the oldest data point if the data source contains kMaxDataPoints objects.)
+ * Initialize the tweetDataModel object
  *
- * @param aDataPoint An instance of ABCDataPoint.
- * @return The oldest data point, if any.
+ * @param name User name
+ * @param screenName display name
+ * @param tweetText text of the tweet
+ * @param profileImage Url of the profileImage
+ * @param creationDate Date & time this tweet was posted
+ * @return TweetDataModel instance of TweetDataModel
  */
--(void) test
-{
-    @try {
-        
-    }
-    @catch (NSException *exception) {
-        NSLog(@"Exception in :: . Details: %@",exception.description);
-    }
-}
-
 -(TweetDataModel *) initWithValues: (NSString *) name screenName:(NSString *) displayName tweetText:(NSString *) text profileImage:(NSString *) imageUrl creationDate:(NSString *) tweetDate
 {
     self = [super init];
