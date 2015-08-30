@@ -10,6 +10,8 @@
 		1653874E36CE2092D69927BE /* libPods-Social SearcherTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F0EB7017B9AC6F983E848B /* libPods-Social SearcherTests.a */; };
 		6D6A98F01B9201A700925B31 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6A98EF1B9201A700925B31 /* Utility.m */; };
 		6D6A98F21B929E1600925B31 /* TweetDataModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6A98F11B929E1600925B31 /* TweetDataModelSpec.m */; };
+		6D6A98F81B92F5B400925B31 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6A98F71B92F5B400925B31 /* HelpViewController.m */; };
+		6D6A98FA1B92F8FA00925B31 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D6A98F91B92F8FA00925B31 /* Back.png */; };
 		6DFB1BB91B8C4B3000514523 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BB81B8C4B3000514523 /* main.m */; };
 		6DFB1BBC1B8C4B3000514523 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BBB1B8C4B3000514523 /* AppDelegate.m */; };
 		6DFB1BBF1B8C4B3000514523 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BBE1B8C4B3000514523 /* MainViewController.m */; };
@@ -45,6 +47,9 @@
 		6D6A98EE1B9201A700925B31 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		6D6A98EF1B9201A700925B31 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		6D6A98F11B929E1600925B31 /* TweetDataModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetDataModelSpec.m; sourceTree = "<group>"; };
+		6D6A98F61B92F5B400925B31 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		6D6A98F71B92F5B400925B31 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		6D6A98F91B92F8FA00925B31 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Back.png; path = Images/Back.png; sourceTree = "<group>"; };
 		6DFB1BB31B8C4B3000514523 /* Social Searcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Social Searcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DFB1BB71B8C4B3000514523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DFB1BB81B8C4B3000514523 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -192,6 +197,8 @@
 				6DFB1BBE1B8C4B3000514523 /* MainViewController.m */,
 				6DFB1BF51B8D766200514523 /* AccountManager.h */,
 				6DFB1BF61B8D766200514523 /* AccountManager.m */,
+				6D6A98F61B92F5B400925B31 /* HelpViewController.h */,
+				6D6A98F71B92F5B400925B31 /* HelpViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -251,6 +258,7 @@
 		6DFB1BF81B8F05E000514523 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6D6A98F91B92F8FA00925B31 /* Back.png */,
 				6DFB1BFD1B90568700514523 /* twitterImg.png */,
 				6DFB1BFB1B9054C200514523 /* SearchBg.png */,
 				6DFB1BF91B8F05F100514523 /* Default.png */,
@@ -340,6 +348,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D6A98FA1B92F8FA00925B31 /* Back.png in Resources */,
 				6DFB1BC21B8C4B3000514523 /* Main.storyboard in Resources */,
 				6DFB1BFC1B9054C200514523 /* SearchBg.png in Resources */,
 				6DFB1BC71B8C4B3000514523 /* LaunchScreen.xib in Resources */,
@@ -401,6 +410,7 @@
 				6DFB1C021B9091EB00514523 /* Reachability.m in Sources */,
 				6DFB1BEB1B8C5C1E00514523 /* SearchTableViewCell.m in Sources */,
 				6D6A98F01B9201A700925B31 /* Utility.m in Sources */,
+				6D6A98F81B92F5B400925B31 /* HelpViewController.m in Sources */,
 				6DFB1BF71B8D766200514523 /* AccountManager.m in Sources */,
 				6DFB1BBC1B8C4B3000514523 /* AppDelegate.m in Sources */,
 				6DFB1BB91B8C4B3000514523 /* main.m in Sources */,

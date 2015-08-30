@@ -22,7 +22,11 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Tweet Searcher" id="fuK-I4-zbF">
-                                        <barButtonItem key="rightBarButtonItem" title="Help" id="LrJ-gz-Ejg"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Help" id="LrJ-gz-Ejg">
+                                            <connections>
+                                                <segue destination="yNf-CK-8T1" kind="modal" identifier="ShowHelp" modalTransitionStyle="crossDissolve" id="lgp-3I-6S8"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -123,8 +127,53 @@
             </objects>
             <point key="canvasLocation" x="171" y="357"/>
         </scene>
+        <!--Help View Controller-->
+        <scene sceneID="mH1-h7-y1x">
+            <objects>
+                <viewController id="yNf-CK-8T1" customClass="HelpViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qtf-6K-hbA"/>
+                        <viewControllerLayoutGuide type="bottom" id="zt5-C2-gUO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FTY-e9-HeO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fku-dz-MHw">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Help" id="HUv-Ne-ZVf">
+                                        <barButtonItem key="leftBarButtonItem" image="Back-50.png" width="16" id="R3c-wp-OAv">
+                                            <connections>
+                                                <action selector="BackButtonClicked:" destination="yNf-CK-8T1" id="bPX-p8-4Wc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1pf-H7-y2R">
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fku-dz-MHw" firstAttribute="leading" secondItem="FTY-e9-HeO" secondAttribute="leadingMargin" constant="-16" id="MKz-N6-M59"/>
+                            <constraint firstItem="fku-dz-MHw" firstAttribute="trailing" secondItem="FTY-e9-HeO" secondAttribute="trailingMargin" constant="16" id="TfL-hY-GmR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="BackButton" destination="R3c-wp-OAv" id="MMt-ng-hud"/>
+                        <outlet property="htmlView" destination="1pf-H7-y2R" id="lOI-Hd-4S6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BgM-Bt-E0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="631" y="357"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Back-50.png" width="26" height="26"/>
         <image name="SearchBg.png" width="458" height="44"/>
         <image name="twitterImg.png" width="50" height="50"/>
     </resources>
