@@ -25,7 +25,5 @@
 //Tweet Time
 @property (nonatomic, weak) IBOutlet UILabel* timeLabel;
 
-+ (CGFloat)heightForTweet:(TweetDataModel *)tweet;
-+(UIFont *) getFontType;
 
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1653874E36CE2092D69927BE /* libPods-Social SearcherTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F0EB7017B9AC6F983E848B /* libPods-Social SearcherTests.a */; };
+		6D6A98F01B9201A700925B31 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6A98EF1B9201A700925B31 /* Utility.m */; };
+		6D6A98F21B929E1600925B31 /* TweetDataModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6A98F11B929E1600925B31 /* TweetDataModelSpec.m */; };
 		6DFB1BB91B8C4B3000514523 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BB81B8C4B3000514523 /* main.m */; };
 		6DFB1BBC1B8C4B3000514523 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BBB1B8C4B3000514523 /* AppDelegate.m */; };
 		6DFB1BBF1B8C4B3000514523 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BBE1B8C4B3000514523 /* MainViewController.m */; };
@@ -25,6 +28,7 @@
 		6DFB1BFC1B9054C200514523 /* SearchBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFB1BFB1B9054C200514523 /* SearchBg.png */; };
 		6DFB1BFE1B90568700514523 /* twitterImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFB1BFD1B90568700514523 /* twitterImg.png */; };
 		6DFB1C021B9091EB00514523 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1C011B9091EB00514523 /* Reachability.m */; };
+		6DFB1C061B91B77B00514523 /* MainViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1C051B91B77B00514523 /* MainViewControllerSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D6A98EE1B9201A700925B31 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		6D6A98EF1B9201A700925B31 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		6D6A98F11B929E1600925B31 /* TweetDataModelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetDataModelSpec.m; sourceTree = "<group>"; };
 		6DFB1BB31B8C4B3000514523 /* Social Searcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Social Searcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DFB1BB71B8C4B3000514523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DFB1BB81B8C4B3000514523 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -68,6 +75,10 @@
 		6DFB1BFD1B90568700514523 /* twitterImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitterImg.png; path = Images/twitterImg.png; sourceTree = "<group>"; };
 		6DFB1C001B9091EB00514523 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		6DFB1C011B9091EB00514523 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		6DFB1C051B91B77B00514523 /* MainViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewControllerSpec.m; sourceTree = "<group>"; };
+		73114C6199213002452166AE /* Pods-Social SearcherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social SearcherTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Social SearcherTests/Pods-Social SearcherTests.release.xcconfig"; sourceTree = "<group>"; };
+		893C799BD5902B3731F388C8 /* Pods-Social SearcherTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social SearcherTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Social SearcherTests/Pods-Social SearcherTests.debug.xcconfig"; sourceTree = "<group>"; };
+		90F0EB7017B9AC6F983E848B /* libPods-Social SearcherTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Social SearcherTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,12 +96,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1653874E36CE2092D69927BE /* libPods-Social SearcherTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		661FA2517B414494C5244585 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				893C799BD5902B3731F388C8 /* Pods-Social SearcherTests.debug.xcconfig */,
+				73114C6199213002452166AE /* Pods-Social SearcherTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6DFB1BAA1B8C4B3000514523 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +119,7 @@
 				6DFB1BCF1B8C4B3100514523 /* Social SearcherTests */,
 				6DFB1BE21B8C4CC100514523 /* Frameworks */,
 				6DFB1BB41B8C4B3000514523 /* Products */,
+				661FA2517B414494C5244585 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,8 +158,10 @@
 		6DFB1BCF1B8C4B3100514523 /* Social SearcherTests */ = {
 			isa = PBXGroup;
 			children = (
+				6DFB1C051B91B77B00514523 /* MainViewControllerSpec.m */,
 				6DFB1BD21B8C4B3100514523 /* Social_SearcherTests.m */,
 				6DFB1BD01B8C4B3100514523 /* Supporting Files */,
+				6D6A98F11B929E1600925B31 /* TweetDataModelSpec.m */,
 			);
 			path = "Social SearcherTests";
 			sourceTree = "<group>";
@@ -156,6 +180,7 @@
 				6DFB1BE01B8C4C6A00514523 /* UIKit.framework */,
 				6DFB1BDE1B8C4C4600514523 /* Accounts.framework */,
 				6DFB1BDC1B8C4C3D00514523 /* Social.framework */,
+				90F0EB7017B9AC6F983E848B /* libPods-Social SearcherTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,6 +190,8 @@
 			children = (
 				6DFB1BBD1B8C4B3000514523 /* MainViewController.h */,
 				6DFB1BBE1B8C4B3000514523 /* MainViewController.m */,
+				6DFB1BF51B8D766200514523 /* AccountManager.h */,
+				6DFB1BF61B8D766200514523 /* AccountManager.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -185,6 +212,8 @@
 				6DFB1BED1B8C62F200514523 /* HttpNetworkModel.m */,
 				6DFB1BEF1B8C634600514523 /* TweetDataModel.h */,
 				6DFB1BF01B8C634600514523 /* TweetDataModel.m */,
+				6DFB1C001B9091EB00514523 /* Reachability.h */,
+				6DFB1C011B9091EB00514523 /* Reachability.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -201,11 +230,9 @@
 		6DFB1BE71B8C4DC900514523 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6DFB1C001B9091EB00514523 /* Reachability.h */,
-				6DFB1C011B9091EB00514523 /* Reachability.m */,
 				6DFB1BF21B8D5B0400514523 /* Constants.h */,
-				6DFB1BF51B8D766200514523 /* AccountManager.h */,
-				6DFB1BF61B8D766200514523 /* AccountManager.m */,
+				6D6A98EE1B9201A700925B31 /* Utility.h */,
+				6D6A98EF1B9201A700925B31 /* Utility.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -255,9 +282,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6DFB1BD91B8C4B3100514523 /* Build configuration list for PBXNativeTarget "Social SearcherTests" */;
 			buildPhases = (
+				465C492A049B5CEA9B163430 /* Check Pods Manifest.lock */,
 				6DFB1BC81B8C4B3100514523 /* Sources */,
 				6DFB1BC91B8C4B3100514523 /* Frameworks */,
 				6DFB1BCA1B8C4B3100514523 /* Resources */,
+				03536DA60F313B03DE712D2C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -329,6 +358,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		03536DA60F313B03DE712D2C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Social SearcherTests/Pods-Social SearcherTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		465C492A049B5CEA9B163430 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6DFB1BAF1B8C4B3000514523 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -338,6 +400,7 @@
 				6DFB1BBF1B8C4B3000514523 /* MainViewController.m in Sources */,
 				6DFB1C021B9091EB00514523 /* Reachability.m in Sources */,
 				6DFB1BEB1B8C5C1E00514523 /* SearchTableViewCell.m in Sources */,
+				6D6A98F01B9201A700925B31 /* Utility.m in Sources */,
 				6DFB1BF71B8D766200514523 /* AccountManager.m in Sources */,
 				6DFB1BBC1B8C4B3000514523 /* AppDelegate.m in Sources */,
 				6DFB1BB91B8C4B3000514523 /* main.m in Sources */,
@@ -349,6 +412,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DFB1C061B91B77B00514523 /* MainViewControllerSpec.m in Sources */,
+				6D6A98F21B929E1600925B31 /* TweetDataModelSpec.m in Sources */,
 				6DFB1BD31B8C4B3100514523 /* Social_SearcherTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +532,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Social Searcher/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -477,6 +546,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Social Searcher/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -485,6 +558,7 @@
 		};
 		6DFB1BDA1B8C4B3100514523 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 893C799BD5902B3731F388C8 /* Pods-Social SearcherTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -504,6 +578,7 @@
 		};
 		6DFB1BDB1B8C4B3100514523 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73114C6199213002452166AE /* Pods-Social SearcherTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -536,6 +611,7 @@
 				6DFB1BD81B8C4B3100514523 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6DFB1BD91B8C4B3100514523 /* Build configuration list for PBXNativeTarget "Social SearcherTests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +620,7 @@
 				6DFB1BDB1B8C4B3100514523 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

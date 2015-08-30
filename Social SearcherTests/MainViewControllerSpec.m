@@ -132,6 +132,5 @@ describe(@"MainViewController", ^{
         [[theValue([viewController.tweetResultsArray count]) should] equal:theValue(2)];
     }); //END IT#6
     
-
 }); //END DESCRIBE
 SPEC_END

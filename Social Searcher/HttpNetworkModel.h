@@ -24,5 +24,6 @@
 
 -(void) performTwitterSearch:(NSString *) searchText withMetaData:(NSDictionary *) searchMetaData;
 -(void) getImageData:(NSIndexPath *)indexPath forUrl:(NSString *)imageUrl;
+-(void) populateTweetDataModel: (NSDictionary *) tweetData;
 
 @end

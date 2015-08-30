@@ -8,7 +8,7 @@
         <!--Main View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="vXZ-lx-hvc" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -19,9 +19,11 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEN-ha-bfX">
                                 <rect key="frame" x="0.0" y="1" width="320" height="44"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="Tweet Searcher" id="fuK-I4-zbF"/>
+                                    <navigationItem title="Tweet Searcher" id="fuK-I4-zbF">
+                                        <barButtonItem key="rightBarButtonItem" title="Help" id="LrJ-gz-Ejg"/>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="n4W-3k-e1M">
@@ -34,8 +36,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jgn-XD-UvA" id="Z6B-Y4-aEH">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZA-Pj-gVe">
-                                                    <rect key="frame" x="66" y="29" width="247" height="82"/>
+                                                <textView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZA-Pj-gVe">
+                                                    <rect key="frame" x="65" y="29" width="250" height="82"/>
                                                     <string key="text">this is line 1 this is line 2 this is line 3 this is line 4 this is line 5 this is line 6 this is line 7 this is line 8 this is line 9 this is line 10 this is line 11</string>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -45,9 +47,9 @@
                                                     <rect key="frame" x="8" y="7" width="59" height="59"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sachin Tendulkar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GBO-fR-aif">
-                                                    <rect key="frame" x="71" y="21" width="140" height="16"/>
+                                                    <rect key="frame" x="77" y="21" width="140" height="16"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="14"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="sachin_rt" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PSA-Aw-0Kf">
@@ -57,17 +59,17 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLh-a6-ILX">
-                                                    <rect key="frame" x="71" y="5" width="241" height="16"/>
+                                                    <rect key="frame" x="77" y="5" width="241" height="16"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="NZA-Pj-gVe" firstAttribute="bottom" secondItem="Z6B-Y4-aEH" secondAttribute="bottomMargin" id="6XQ-tb-u1Q"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="NZA-Pj-gVe" secondAttribute="trailing" constant="-3" id="JcW-6w-0mV"/>
-                                                <constraint firstItem="NZA-Pj-gVe" firstAttribute="leading" secondItem="Z6B-Y4-aEH" secondAttribute="leadingMargin" constant="60" id="LIq-Bo-VIW"/>
+                                                <constraint firstItem="NZA-Pj-gVe" firstAttribute="leading" secondItem="Z6B-Y4-aEH" secondAttribute="leadingMargin" constant="57" id="hKI-Pl-2CQ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="NZA-Pj-gVe" secondAttribute="trailing" constant="-3" id="uUO-82-SlP"/>
                                                 <constraint firstItem="NZA-Pj-gVe" firstAttribute="top" secondItem="Z6B-Y4-aEH" secondAttribute="topMargin" constant="21" id="v5i-HY-fgb"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -87,7 +89,7 @@
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="twitterImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="65H-ZG-KBv">
                                 <rect key="frame" x="69" y="14" width="20" height="20"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             </imageView>
                             <searchBar contentMode="redraw" misplaced="YES" backgroundImage="SearchBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="WH9-8o-R1x">
                                 <rect key="frame" x="0.0" y="44" width="319" height="44"/>

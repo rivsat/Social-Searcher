@@ -12,6 +12,12 @@
 #import "AccountManager.h"
 
 #import "Constants.h"
+@interface HttpNetworkModel()
+//Private methods
+- (void)searchTweets: (NSURL*) requestURL requestParameters: (NSDictionary *) parameters forAccount: (ACAccount *) twitterAccount;
+-(void) populateTweetDataModel: (NSDictionary *) tweetData;
+
+@end
 
 @implementation HttpNetworkModel
 @synthesize delegate;
@@ -37,6 +43,7 @@
  * Calls [self searchTweets:searchText]; to performs a keywords / hashtag search on Twitter
  *
  * @param searchText The keywords to be searched
+ * @param withMetaData The metaData for the search. Used for subsequent pagination data.
  * @return internally does a callback to delegate didFinishLoadingData.
  */
 -(void) performTwitterSearch:(NSString *) searchText withMetaData:(NSDictionary *) searchMetaData
@@ -175,6 +182,8 @@
     @catch (NSException *exception) {
         NSLog(@"Exception in HttpNetworkModel::populateTweetDataModel . Details: %@",exception.description);
     }
+    //#NOTE: We are already on the main thread (from HttpNetworkModel::searchTweets).
+    //So directly call the delegate.
     [self.delegate httpNetworkModel:self didFinishLoadingData:[resutsArray mutableCopy] withMetaData:metaData];
 }
 
@@ -198,26 +207,6 @@
         });
     });
 }
-
-/**
- * Performs a URL encoding of the query
- *
- * @param inputString The query string to be encoded
- * @return URL encoded string
- */
-- (NSString *)encodeQuery:(NSString *)inputString {
-    @try {
-        return [inputString
-                stringByAddingPercentEscapesUsingEncoding:
-                NSUTF8StringEncoding];
-        
-    }
-    @catch (NSException *exception) {
-        NSLog(@"Exception in HttpNetworkModel::encodeQuery . Details: %@",exception.description);
-        return inputString;
-    }
-}
-
 
 
 @end
