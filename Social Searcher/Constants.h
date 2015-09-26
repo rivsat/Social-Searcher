@@ -29,3 +29,13 @@ static NSString * const kTestDisplayNameTwitterFormat = @"@sachin_rt";
 static NSString * const kTestTweetText = @"Priviledged to have played for India.";
 static NSString * const kTestProfileImageUrl = @"http://pbs.twimg.com/profile_images/378800000274891563/95fad139059409f2455c371aa9992557_normal.png";
 static NSString * const kTestTweetDate = @"Sat Aug 29 06:42:56 +0000 2015";
+
+//Query String Format
+static NSString * const kQueryStringFormat = @"<_KEYWORD_> <_SINCE_> <_UNTIL_>";
+static NSString * const kQueryKeyWord = @"<_KEYWORD_>";
+
+static NSString * const kQuerySince = @"<_SINCE_>";
+static NSString * const kQuerySinceValue = @"Since:";
+
+static NSString * const kQueryUntil = @"<_UNTIL_>";
+static NSString * const kQueryUntilValue = @"Until:";

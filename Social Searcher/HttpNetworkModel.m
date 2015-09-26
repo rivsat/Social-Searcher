@@ -103,8 +103,7 @@
         postRequest.account = twitterAccount;
         
         [postRequest performRequestWithHandler:
-         ^(NSData *responseData, NSHTTPURLResponse
-           *urlResponse, NSError *error)
+         ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
          {
              NSDictionary *tweetData = [NSJSONSerialization
                                         JSONObjectWithData:responseData

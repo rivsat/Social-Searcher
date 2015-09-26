@@ -12,5 +12,6 @@
 
 +(NSString *) getDisplayTime: (NSString *) tweetTime;
 +(NSString *)encodeQuery:(NSString *)inputString;
++(NSString *) constructSearchQuery: (NSString *) strKeyWords filterSetting :(BOOL) isFilterON startDate: (NSString *) strStartDate endDate: (NSString *) strEndDate;
 
 @end

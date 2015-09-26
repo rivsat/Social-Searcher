@@ -12,6 +12,7 @@
 		6D6A98F21B929E1600925B31 /* TweetDataModelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6A98F11B929E1600925B31 /* TweetDataModelSpec.m */; };
 		6D6A98F81B92F5B400925B31 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6A98F71B92F5B400925B31 /* HelpViewController.m */; };
 		6D6A98FA1B92F8FA00925B31 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D6A98F91B92F8FA00925B31 /* Back.png */; };
+		6D8D12521B97E43700EA1EE8 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8D12511B97E43700EA1EE8 /* FilterViewController.m */; };
 		6DFB1BB91B8C4B3000514523 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BB81B8C4B3000514523 /* main.m */; };
 		6DFB1BBC1B8C4B3000514523 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BBB1B8C4B3000514523 /* AppDelegate.m */; };
 		6DFB1BBF1B8C4B3000514523 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB1BBE1B8C4B3000514523 /* MainViewController.m */; };
@@ -50,6 +51,8 @@
 		6D6A98F61B92F5B400925B31 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		6D6A98F71B92F5B400925B31 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		6D6A98F91B92F8FA00925B31 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Back.png; path = Images/Back.png; sourceTree = "<group>"; };
+		6D8D12501B97E43700EA1EE8 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		6D8D12511B97E43700EA1EE8 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		6DFB1BB31B8C4B3000514523 /* Social Searcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Social Searcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DFB1BB71B8C4B3000514523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DFB1BB81B8C4B3000514523 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -199,6 +202,8 @@
 				6DFB1BF61B8D766200514523 /* AccountManager.m */,
 				6D6A98F61B92F5B400925B31 /* HelpViewController.h */,
 				6D6A98F71B92F5B400925B31 /* HelpViewController.m */,
+				6D8D12501B97E43700EA1EE8 /* FilterViewController.h */,
+				6D8D12511B97E43700EA1EE8 /* FilterViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 				6DFB1BEE1B8C62F200514523 /* HttpNetworkModel.m in Sources */,
 				6DFB1BBF1B8C4B3000514523 /* MainViewController.m in Sources */,
 				6DFB1C021B9091EB00514523 /* Reachability.m in Sources */,
+				6D8D12521B97E43700EA1EE8 /* FilterViewController.m in Sources */,
 				6DFB1BEB1B8C5C1E00514523 /* SearchTableViewCell.m in Sources */,
 				6D6A98F01B9201A700925B31 /* Utility.m in Sources */,
 				6D6A98F81B92F5B400925B31 /* HelpViewController.m in Sources */,

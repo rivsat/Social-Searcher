@@ -7,6 +7,7 @@
 //
 
 #import "Utility.h"
+#import "Constants.h"
 
 @implementation Utility
 
@@ -43,6 +44,40 @@
         NSLog(@"Exception in HttpNetworkModel::encodeQuery . Details: %@",exception.description);
         return inputString;
     }
+}
+
+/**
+ * Constructs Twitter search query as per set filters
+ *
+ * @param strKeyWords The search keywords
+ * @param filterSetting Boolean to suggest if filter is ON or OFF
+ * @param startDate The sent since date
+ * @param endDate The sent before date
+ * @return well formed query
+ */
++(NSString *) constructSearchQuery: (NSString *) strKeyWords filterSetting :(BOOL) isFilterON startDate: (NSString *) strStartDate endDate: (NSString *) strEndDate
+{
+    
+    NSMutableString *strSearchQuery = [[NSMutableString alloc] initWithString:kQueryStringFormat];
+    [strSearchQuery replaceOccurrencesOfString:kQueryKeyWord withString:strKeyWords options:NSLiteralSearch range:NSMakeRange(0, strSearchQuery.length)];
+    
+    if (isFilterON) {
+        //Since date
+        NSString *start = (strStartDate.length ? [[NSString alloc] initWithFormat:@"%@%@", kQuerySinceValue, strStartDate] : @"");
+        [strSearchQuery replaceOccurrencesOfString:kQuerySince withString:start options:NSLiteralSearch range:NSMakeRange(0, strSearchQuery.length)];
+        
+        
+        //Until date
+        NSString *end = (strEndDate.length ? [[NSString alloc] initWithFormat:@"%@%@", kQueryUntilValue, strEndDate] : @"");
+        [strSearchQuery replaceOccurrencesOfString:kQueryUntil withString:end options:NSLiteralSearch range:NSMakeRange(0, strSearchQuery.length)];
+
+    }
+    //if there is no filter then just use the search keywords
+    else {
+        strSearchQuery = [strKeyWords mutableCopy];
+    }
+    
+    return strSearchQuery;
 }
 
 @end

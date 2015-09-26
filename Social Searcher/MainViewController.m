@@ -29,6 +29,12 @@
 
 @property BOOL internetActive;
 @property BOOL hostActive;
+
+//isFilterON startDate: (NSString *) strStartDate endDate: (NSString *) strEndDate;
+@property BOOL isFilterON;
+@property (nonatomic, strong) NSString *strStartDate;
+@property (nonatomic, strong) NSString *strEndDate;
+
 @end
 
 @implementation MainViewController
@@ -44,6 +50,10 @@
         NSLog(@"initWithCoder MainViewController");
         _httpNetworkModel = [[HttpNetworkModel alloc] init];
         _httpNetworkModel.delegate = self;
+        
+        _isFilterON = NO;
+        _strStartDate = @"";
+        _strEndDate = @"";
         
         _tweetResultsArray = [[NSMutableArray alloc] init];
         _imageCacheArray =  [[NSMutableArray alloc] init];
@@ -80,10 +90,10 @@
     self.noMoreResultsAvail = NO;
     [_resultsTableView setHidden:YES];
     _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _activityIndicator.frame = CGRectMake(_resultsTableView.frame.origin.x,
-                                              _resultsTableView.frame.origin.y,
-                                              _resultsTableView.frame.size.width,
-                                              _resultsTableView.frame.size.height);
+    _activityIndicator.frame = CGRectMake(self.view.frame.origin.x,
+                                              self.view.frame.origin.y,
+                                              self.view.frame.size.width,
+                                              self.view.frame.size.height);
     [self.view addSubview:_activityIndicator];
     //[self getDisplayTime:@"Sat Aug 29 06:42:56 +0000 2015"];
 }
@@ -113,7 +123,6 @@
             //BLOCK#2
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (accTwitter) {
-                    _searchText = _querySearchBar.text;
                     //dismiss the keyboard
                     [_querySearchBar resignFirstResponder];
                     
@@ -124,7 +133,13 @@
                     [_imageCacheArray removeAllObjects];
                     [_searchMetaData removeAllObjects];
                     [_resultsTableView reloadData];
-                    
+
+                    _searchText = @"";
+                    if (_isFilterON)
+                        _searchText = [Utility constructSearchQuery:_querySearchBar.text filterSetting:_isFilterON startDate:_strStartDate endDate:_strEndDate];
+                    else
+                        _searchText = _querySearchBar.text;
+
                     //Since this is a fresh search there's no meta data
                     [_httpNetworkModel performTwitterSearch:_searchText withMetaData:nil];
                 }
@@ -366,6 +381,7 @@
     }
     
 }
+
 #pragma mark - UIScrollViewDelegate
 
 // -------------------------------------------------------------------------------
@@ -389,6 +405,17 @@
         }
     }
 }
+
+#pragma mark FilterViewControllerDelegate
+-(void) didSetFilter:(BOOL)isFilterON startDate:(NSString *)strStartDate endDate:(NSString *)strEndDate
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        _isFilterON = isFilterON;
+        _strStartDate = strStartDate;
+        _strEndDate = strEndDate;
+    }];
+}
+
 
 #pragma mark Network reachability
 
@@ -450,5 +477,18 @@
     return (self.hostActive || self.internetActive);
 }
 //<
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Filter"])
+    {
+        FilterViewController *filterViewController = segue.destinationViewController;
+        
+        filterViewController.filterDelegate = self;
+        filterViewController.isFilterON = _isFilterON;
+        filterViewController.strStartDate = _strStartDate;
+        filterViewController.strEndDate = _strEndDate;
+    }
+}
 
 @end

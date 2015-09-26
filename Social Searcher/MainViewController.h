@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "HttpNetworkModel.h"
+#import "FilterViewController.h"
 
 @interface MainViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate,
-UIScrollViewDelegate, UIAlertViewDelegate, HttpNetworkModelDelegate>
+UIScrollViewDelegate, UIAlertViewDelegate, HttpNetworkModelDelegate, FilterViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *mainNavigationBar;
 @property (weak, nonatomic) IBOutlet UISearchBar *querySearchBar;
