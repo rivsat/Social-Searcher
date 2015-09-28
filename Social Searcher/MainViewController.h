@@ -18,6 +18,7 @@ UIScrollViewDelegate, UIAlertViewDelegate, HttpNetworkModelDelegate, FilterViewC
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 
 @property (retain, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *filterButton;
 
 @end
 

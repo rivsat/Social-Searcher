@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) HttpNetworkModel *httpNetworkModel;
 @property (nonatomic, strong) NSMutableArray *tweetResultsArray;
-@property (nonatomic, strong) NSMutableArray *imageCacheArray;
+@property (nonatomic, strong) NSMutableDictionary *imageCacheDictionary;
 @property (nonatomic) BOOL noMoreResultsAvail;
 @property (nonatomic) BOOL loading;
 @property (nonatomic, strong) NSString *searchText;
@@ -56,7 +56,7 @@
         _strEndDate = @"";
         
         _tweetResultsArray = [[NSMutableArray alloc] init];
-        _imageCacheArray =  [[NSMutableArray alloc] init];
+        _imageCacheDictionary =  [[NSMutableDictionary alloc] init];
         _searchText = [[NSString alloc] init];
         _searchMetaData = [[NSMutableDictionary alloc] init];
         
@@ -104,7 +104,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     _tweetResultsArray = nil;
-    _imageCacheArray = nil;
+    _imageCacheDictionary = nil;
 }
 
 /**
@@ -130,7 +130,7 @@
                     
                     // reset data structures and reload table.
                     [_tweetResultsArray removeAllObjects];
-                    [_imageCacheArray removeAllObjects];
+                    [_imageCacheDictionary removeAllObjects];
                     [_searchMetaData removeAllObjects];
                     [_resultsTableView reloadData];
 
@@ -210,23 +210,21 @@
     cell.tweetTextView.frame = rect;
     cell.tweetTextView.contentSize = CGSizeMake(cell.tweetTextView.frame.size.width, cell.tweetTextView.frame.size.height);
 
+    //FIX for iOS7 BUG.
+    //http://stackoverflow.com/questions/19121367/uitextviews-in-a-uitableview-link-detection-bug-in-ios-7/19589680
+    cell.tweetTextView.text = nil;
     cell.tweetTextView.text = tweet.text;
     
-    UIImage *img = [self loadImageFromCache:indexPath];
-    if (img) {
-        cell.profileImage.image = img;
-    }
-    else {
-        // download only if the tableView is stationary
-        if (self.resultsTableView.dragging == NO && self.resultsTableView.decelerating == NO) {
-            [_httpNetworkModel getImageData:indexPath forUrl:tweet.profileImageUrl];
-        }
-        // if a download is in progress, show a default image
-        cell.profileImage.image = [UIImage imageNamed:@"Default.png"];        
-    }
+    // if a download is in progress, show a default image
+    //cell.profileImage.image = [UIImage imageNamed:@"Default.png"];
+    // download only if the tableView is stationary
+    //if (self.resultsTableView.dragging == NO && self.resultsTableView.decelerating == NO) {
+        cell.profileImage.image = [self loadProfileImage:indexPath];
+    //}
     
     return cell;
 }
+
 
 /**
  * Calculate height of textView given the text
@@ -274,7 +272,31 @@
     return 1;
 }
 
+#pragma mark table view delegate
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_querySearchBar resignFirstResponder];
+}
+
 #pragma mark - Image retrieval methods
+/**
+ * Load profile image for given indexPath from imageCache or retrieve from Url
+ *
+ * @param indexPath index of the row for which image is required
+ * @return returns UIImage of the image OR default.png if not available in the imageCache
+ */
+-(UIImage *) loadProfileImage:(NSIndexPath *)indexPath
+{
+    UIImage *img = [self loadImageFromCache:indexPath];
+    if (img) {
+        return img;
+    }
+    else {
+        TweetDataModel *tweet = [self.tweetResultsArray objectAtIndex:indexPath.row];
+        [_httpNetworkModel getImageData:indexPath forUrl:tweet.profileImageUrl];
+        return [UIImage imageNamed:@"Default.png"];;
+    }
+}
 
 /**
  * Retrieve Image from local imageCache if available
@@ -285,8 +307,8 @@
 -(UIImage *) loadImageFromCache:(NSIndexPath *)indexPath
 {
     //check if we have it in our cache
-    if (_imageCacheArray.count > indexPath.row) {
-        return [_imageCacheArray objectAtIndex:indexPath.row];
+    if (_imageCacheDictionary.count > indexPath.row) {
+        return [_imageCacheDictionary objectForKey:indexPath];
     }
     //else return nil
     else {
@@ -303,13 +325,13 @@
  */
 - (void)loadImagesForOnscreenRows
 {
-    if (_imageCacheArray.count > 0) {
+    if (_imageCacheDictionary.count > 0) {
         //iterate through visible rows first
         NSArray *visiblePaths = [self.resultsTableView indexPathsForVisibleRows];
         for (NSIndexPath *indexPath in visiblePaths) {
     
             // Download if it's not in our imageCache
-            if (_imageCacheArray.count <= indexPath.row) {
+            if (_imageCacheDictionary.count <= indexPath.row) {
                 NSLog(@"In loadImagesForOnscreenRows, getting profileImage for row: %ld",indexPath.row);
                 TweetDataModel *tweet = [self.tweetResultsArray objectAtIndex:indexPath.row];
                 [_httpNetworkModel getImageData:indexPath forUrl:tweet.profileImageUrl];
@@ -371,7 +393,7 @@
         UIImage *image = [UIImage imageWithData:imageData];
         
         //Update the UI as we are on the main thread
-        [_imageCacheArray addObject:image];
+        _imageCacheDictionary[indexPath] = image;
         SearchTableViewCell *cell = (SearchTableViewCell *)[_resultsTableView cellForRowAtIndexPath:indexPath];
         NSLog(@"In didReceiveImageData, displaying profileImage for row: %ld",indexPath.row);
         cell.profileImage.image = image;

@@ -34,9 +34,14 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        self.textLabel.numberOfLines = 0;
+        self.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        self.textLabel.numberOfLines = 1;
         self.textLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        self.tweetTextView.editable = NO;
+        self.tweetTextView.selectable = YES;
+        
+        self.tweetTextView.dataDetectorTypes = UIDataDetectorTypeLink;
     }
     
     return self;

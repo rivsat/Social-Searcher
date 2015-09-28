@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="smJ-Cg-nnY">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="ZNp-w4-e7p">
+            <objects>
+                <navigationController id="smJ-Cg-nnY" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zQp-6D-mjk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="fgT-Dz-NXk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XWn-FF-hMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-341" y="367"/>
+        </scene>
+        <!--Twitter Searcher-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController storyboardIdentifier="MainViewController" id="vXZ-lx-hvc" customClass="MainViewController" sceneMemberID="viewController">
@@ -17,24 +33,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEN-ha-bfX">
-                                <rect key="frame" x="0.0" y="1" width="320" height="44"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Tweet Searcher" id="fuK-I4-zbF">
-                                        <barButtonItem key="rightBarButtonItem" title="Filter" id="LrJ-gz-Ejg">
-                                            <connections>
-                                                <segue destination="424-4u-CIh" kind="modal" identifier="Filter" modalTransitionStyle="flipHorizontal" id="ufl-77-mhk"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="n4W-3k-e1M">
-                                <rect key="frame" x="0.0" y="88" width="319" height="480"/>
+                                <rect key="frame" x="1" y="65" width="317" height="503"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchResultCell" rowHeight="120" id="Jgn-XD-UvA" customClass="SearchTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchResultCell" rowHeight="120" id="Jgn-XD-UvA" customClass="SearchTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jgn-XD-UvA" id="Z6B-Y4-aEH">
@@ -50,7 +53,7 @@
                                                     <rect key="frame" x="8" y="7" width="59" height="59"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sachin Tendulkar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GBO-fR-aif">
-                                                    <rect key="frame" x="77" y="21" width="140" height="16"/>
+                                                    <rect key="frame" x="77" y="21" width="136" height="16"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -90,12 +93,8 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="W5E-vg-qux"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="twitterImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="65H-ZG-KBv">
-                                <rect key="frame" x="69" y="14" width="20" height="20"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                            </imageView>
                             <searchBar contentMode="redraw" placeholder="search tweets &amp; hashtags" backgroundImage="SearchBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="WH9-8o-R1x">
-                                <rect key="frame" x="0.0" y="44" width="319" height="44"/>
+                                <rect key="frame" x="0.0" y="65" width="319" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="fCQ-Ez-bZS"/>
@@ -104,20 +103,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="tEN-ha-bfX" secondAttribute="trailing" constant="-16" id="6IE-Z5-Ozv"/>
-                            <constraint firstItem="tEN-ha-bfX" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="9Tm-4v-dQh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="n4W-3k-e1M" secondAttribute="trailing" constant="-15" id="LmD-Mn-tyk"/>
-                            <constraint firstItem="n4W-3k-e1M" firstAttribute="top" secondItem="WH9-8o-R1x" secondAttribute="bottom" id="PIk-Vw-WS8"/>
-                            <constraint firstItem="WH9-8o-R1x" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="QbX-Pn-41e"/>
-                            <constraint firstItem="tEN-ha-bfX" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-19" id="bCZ-DN-mCr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WH9-8o-R1x" secondAttribute="trailing" constant="-15" id="dr0-7K-k3P"/>
-                            <constraint firstItem="WH9-8o-R1x" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="24" id="eeJ-FQ-bka"/>
-                            <constraint firstItem="n4W-3k-e1M" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="tNb-Hv-bSA"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="n4W-3k-e1M" secondAttribute="bottom" id="tce-EB-ShP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="n4W-3k-e1M" secondAttribute="trailingMargin" constant="1" id="1SA-hW-MBc"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="n4W-3k-e1M" secondAttribute="bottom" id="8tm-hr-xol"/>
+                            <constraint firstItem="n4W-3k-e1M" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="1" id="Cdy-HW-Avt"/>
+                            <constraint firstItem="n4W-3k-e1M" firstAttribute="leadingMargin" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Mhz-gz-g8w"/>
+                            <constraint firstItem="WH9-8o-R1x" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="mHv-aO-bme"/>
+                            <constraint firstItem="WH9-8o-R1x" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="1" id="t62-73-7ln"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WH9-8o-R1x" secondAttribute="trailing" constant="-15" id="vsm-gD-2Yc"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Twitter Searcher" id="Csj-I0-zMB">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="RnC-XG-qoT">
+                            <connections>
+                                <segue destination="424-4u-CIh" kind="modal" identifier="Filter" id="dO3-37-X4V"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="mainNavigationBar" destination="tEN-ha-bfX" id="enT-3R-E1l"/>
+                        <outlet property="filterButton" destination="RnC-XG-qoT" id="7Bz-Pe-zcO"/>
                         <outlet property="querySearchBar" destination="WH9-8o-R1x" id="o9e-AG-S8x"/>
                         <outlet property="resultsTableView" destination="n4W-3k-e1M" id="ltO-qM-KNb"/>
                     </connections>
@@ -125,50 +128,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="171" y="357"/>
-        </scene>
-        <!--Help View Controller-->
-        <scene sceneID="mH1-h7-y1x">
-            <objects>
-                <viewController id="yNf-CK-8T1" customClass="HelpViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Qtf-6K-hbA"/>
-                        <viewControllerLayoutGuide type="bottom" id="zt5-C2-gUO"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="FTY-e9-HeO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fku-dz-MHw">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Help" id="HUv-Ne-ZVf">
-                                        <barButtonItem key="leftBarButtonItem" image="Back-50.png" width="16" id="R3c-wp-OAv">
-                                            <connections>
-                                                <action selector="BackButtonClicked:" destination="yNf-CK-8T1" id="bPX-p8-4Wc"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1pf-H7-y2R">
-                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="fku-dz-MHw" firstAttribute="leading" secondItem="FTY-e9-HeO" secondAttribute="leadingMargin" constant="-16" id="MKz-N6-M59"/>
-                            <constraint firstItem="fku-dz-MHw" firstAttribute="trailing" secondItem="FTY-e9-HeO" secondAttribute="trailingMargin" constant="16" id="TfL-hY-GmR"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="BackButton" destination="R3c-wp-OAv" id="MMt-ng-hud"/>
-                        <outlet property="htmlView" destination="1pf-H7-y2R" id="lOI-Hd-4S6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BgM-Bt-E0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="757" y="-313"/>
         </scene>
         <!--Filter View Controller-->
         <scene sceneID="R44-Zr-tXN">
@@ -334,10 +293,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Back-50.png" width="26" height="26"/>
         <image name="Back.png" width="26" height="26"/>
         <image name="SearchBg.png" width="458" height="44"/>
-        <image name="twitterImg.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
