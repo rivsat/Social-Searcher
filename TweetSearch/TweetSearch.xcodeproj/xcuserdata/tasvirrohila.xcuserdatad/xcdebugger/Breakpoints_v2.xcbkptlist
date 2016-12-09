@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TweetSearch/Module/TweetDataManager.swift"
+            timestampString = "502868815.811743"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "getAccessToken(onSuccess:onFailure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TweetSearch/Module/TweetDataManager.swift"
+            timestampString = "502868822.008905"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "getAccessToken(onSuccess:onFailure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TweetSearch/Module/Common/HttpManager.swift"
+            timestampString = "502868895.350702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "getData(httpMethod:url:requestHeaderDict:requestBodyData:onSuccess:onFailure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TweetSearch/Module/Common/HttpManager.swift"
+            timestampString = "502869025.921902"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "handleHTTPDataResponse(data:response:error:onSuccess:onFailure:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TweetSearch.HttpManager.handleHTTPDataResponse (data : Swift.Optional&lt;Foundation.Data&gt;, response : Swift.Optional&lt;__ObjC.URLResponse&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;, onSuccess : Swift.Optional&lt;(TweetSearch.HttpApiResponse) -&gt; ()&gt;, onFailure : Swift.Optional&lt;(TweetSearch.HttpApiResponse) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "TweetSearch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tasvirrohila/Documents/MyProjects/Test%20Projects/ObjC/IttyBittyApps/Social%20Searcher/TweetSearch/TweetSearch/Module/Common/HttpManager.swift"
+                  timestampString = "502932524.102101"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TweetSearch.HttpManager.handleHTTPDataResponse (data : Swift.Optional&lt;Foundation.Data&gt;, response : Swift.Optional&lt;__ObjC.URLResponse&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;, onSuccess : Swift.Optional&lt;(TweetSearch.HttpApiResponse) -&gt; ()&gt;, onFailure : Swift.Optional&lt;(TweetSearch.HttpApiResponse) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "TweetSearch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tasvirrohila/Documents/MyProjects/Test%20Projects/ObjC/IttyBittyApps/Social%20Searcher/TweetSearch/TweetSearch/Module/Common/HttpManager.swift"
+                  timestampString = "502932524.105958"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "304">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TweetSearch/Module/Common/HttpManager.swift"
+            timestampString = "502931838.940546"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "composeRequest(httpMethod:theURL:theRequestHeaderDict:theRequestBodyData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TweetSearch/Module/Common/HttpManager.swift"
+            timestampString = "502932261.655223"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "composeRequest(httpMethod:theURL:theRequestHeaderDict:theRequestBodyData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
