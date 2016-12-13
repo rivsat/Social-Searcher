@@ -14,4 +14,4 @@ var kAppBearerAuthKey = ""
 let kUserAgent = "Social-Searcher App ver 1.0.0"
 
 let oAuthTokenApi = "https://api.twitter.com/oauth2/token"
-let tweetSearchApi = "https://api.twitter.com/1.1/search/tweets.json"
+let tweetSearchApi = "https://api.twitter.com/1.1/search/tweets.json?q="
