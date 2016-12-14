@@ -55,8 +55,15 @@ public class TweetDataManager {
         }
     }
     
-    public func getTweets(forQuery queryString: String, onSuccess: @escaping ()-> Void, onFailure: @escaping (String) -> Void) {
-        let theURL = tweetSearchApi + (queryString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+    public func getTweets(forQuery queryString: String, maxId: String, lang: String = "en", onSuccess: @escaping ()-> Void, onFailure: @escaping (String) -> Void) {
+        var toAppendResults = false
+        var theURL = tweetSearchApi + (queryString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        // language ISO 639-1
+        theURL += "&lang=\(lang)"
+        if !maxId.isEmpty {
+            toAppendResults = true
+            theURL += "&max_id=\(maxId)"
+        }
         var requestHeaderDict = self.defaultRequestHeader
         requestHeaderDict[RequestHeader.authorization.rawValue] = kAppBearerAuthKey
         
@@ -66,7 +73,7 @@ public class TweetDataManager {
             requestBodyData: nil,
             onSuccess: { (apiResponse) in
                 DispatchQueue.main.async {
-                    self.populateTweets(apiResponse: apiResponse)
+                    self.populateTweets(apiResponse: apiResponse, toAppend: toAppendResults)
                     onSuccess()
                 }
         }) { (apiResponse) in
@@ -108,15 +115,21 @@ public class TweetDataManager {
     }
     
     
-    private func populateTweets(apiResponse: HttpApiResponse) {
-        self.tweetData.removeAll()
+    private func populateTweets(apiResponse: HttpApiResponse, toAppend: Bool = false) {
+        if !toAppend {
+            clearTweets()
+        }
         if let JSONObjects = apiResponse.responseJSON?["statuses"] as? [[String: AnyObject]] {
             for item in JSONObjects {
                 if let _tweet = Tweet(withJSON: item) {
-                    self.tweetData.append(_tweet)
+                    tweetData.append(_tweet)
                 }
             }
         }
+    }
+    
+    func clearTweets() {
+        self.tweetData.removeAll()
     }
     
     private var defaultRequestHeader: [String: String] {

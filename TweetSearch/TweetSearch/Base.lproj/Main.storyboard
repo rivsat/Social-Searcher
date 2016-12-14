@@ -23,18 +23,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t99-gN-mSy">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" id="ajo-PJ-5dY" customClass="TweetCell" customModule="TweetSearch" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ajo-PJ-5dY" id="akb-z8-jZE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7m6-9W-0QG">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter-icon" translatesAutoresizingMaskIntoConstraints="NO" id="7m6-9W-0QG">
                                                     <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="2Tg-0t-UDh"/>
                                                         <constraint firstAttribute="width" constant="50" id="YnJ-Zv-hc2"/>
@@ -123,7 +124,7 @@
                         <constraints>
                             <constraint firstItem="t99-gN-mSy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HW1-HI-3hM"/>
                             <constraint firstAttribute="trailing" secondItem="t99-gN-mSy" secondAttribute="trailing" id="P74-qy-1op"/>
-                            <constraint firstItem="t99-gN-mSy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="cga-2V-NT8"/>
+                            <constraint firstItem="t99-gN-mSy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-44" id="cga-2V-NT8"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="t99-gN-mSy" secondAttribute="bottom" id="gIO-8L-5Eg"/>
                         </constraints>
                     </view>
@@ -139,7 +140,8 @@
         <!--Navigation Controller-->
         <scene sceneID="YPH-uz-BdE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oLj-Xx-5qJ" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sVD-Jz-sgs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="oLj-Xx-5qJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2p4-aQ-ny0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -150,9 +152,11 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Uhv-CE-Dwu"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sVD-Jz-sgs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="197.59999999999999" y="746.17691154422789"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="twitter-icon" width="29" height="29"/>
+    </resources>
 </document>

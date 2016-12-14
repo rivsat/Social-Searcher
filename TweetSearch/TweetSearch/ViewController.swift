@@ -39,6 +39,8 @@ class ViewController: UIViewController {
     }
 
     func initializeTableView() {
+        tableView.tableHeaderView = UIView()
+        tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -92,20 +94,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         //        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "Cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
-        if let data = TweetDataManager.shared.getTweet(at: indexPath.row, onComplete: refreshItem) {
-            cell.name.text = data.user.name
-            cell.userName.text = data.user.screenName
-            cell.period.text = data.createdAt
-            cell.tweetText.text = data.text
-            debugPrint(data.text)
-            
-            cell.layoutIfNeeded()
-            cell.imageSmall.layer.cornerRadius = 12.0
-            //cell.carImage.downloadFromURL(data.mainPhotoURL)
-            if let mainPhotoData = TweetDataManager.shared.getTweet(at: indexPath.row, onComplete: refreshItem)?.user.profileImageData {
-                cell.imageSmall.image = UIImage(data: mainPhotoData)
-            }
+        if let data = TweetDataManager.shared.getTweet(at: indexPath.row, onComplete: nil) {
+            populateData(forcell: cell, data: data, at: indexPath.row)
+            fetchMoreTweets(currentRow: indexPath.row, data: data)
         }
+
         return cell
     }
     
@@ -114,8 +107,36 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func refreshItem(at index: Int) {
-        let indexPath = IndexPath(item: index, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        /*let indexPath = IndexPath(item: index, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .automatic)*/
+        tableView.reloadData()
+    }
+    
+    func populateData(forcell cell: TweetCell, data: Tweet, at row: Int) {
+        cell.name.text = data.user.name
+        cell.userName.text = data.user.screenName
+        cell.period.text = data.createdAt
+        cell.tweetText.text = data.text
+//        debugPrint(data.text)
+        
+        cell.layoutIfNeeded()
+        cell.imageSmall.roundCornersForAspectFit(radius: 12.0)
+        cell.clipsToBounds = true
+        //cell.carImage.downloadFromURL(data.mainPhotoURL)
+        if let mainPhotoData = TweetDataManager.shared.getTweet(at: row, onComplete: refreshItem)?.user.profileImageData {
+            cell.imageSmall.image = UIImage(data: mainPhotoData)
+        }
+    }
+    
+    func fetchMoreTweets(currentRow: Int, data: Tweet) {
+        let tweetCount = TweetDataManager.shared.tweetCount
+        let visibleTweetCount = tableView.visibleCells.count
+
+        //Fetch more tweets only if there are more tweets than those visible
+        if currentRow == tweetCount - 1 && tweetCount > visibleTweetCount {
+            self.searchTweet(searchString: resultSearchController?.searchBar.text ?? "", maxId: data.idStr)
+            tableView.reloadData()
+        }
     }
 }
 
@@ -125,27 +146,36 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var period: UILabel!
     @IBOutlet weak var tweetText: UILabel!
+    
+    override func awakeFromNib() {
+         super.awakeFromNib()
+        
+    }
 }
 
+//MARK: -
+//MARK: UISearchBarDelegate methods
 extension ViewController: UISearchBarDelegate {
+    
+    // called when keyboard search button pressed
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchBarText = searchBar.text {
             searchTweet(searchString: searchBarText)
         } else {
-            //            CarDataManager.sharedInstance().reloadData()
+            TweetDataManager.shared.clearTweets()
+            tableView.reloadData()
         }
     }
-    /*func updateSearchResults(for searchController: UISearchController) {
-        if let searchBarText = searchController.searchBar.text {
-            //            CarDataManager.sharedInstance().filterSearch(searchBarText)
-        } else {
-            //            CarDataManager.sharedInstance().reloadData()
-        }
-        self.tableView.reloadData()
-    }*/
     
-    func searchTweet(searchString: String) {
+    // called when cancel button pressed
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        TweetDataManager.shared.clearTweets()
+        tableView.reloadData()
+    }
+    
+    func searchTweet(searchString: String, maxId: String = "") {
         TweetDataManager.shared.getTweets(forQuery: searchString,
+                                          maxId: maxId,
                                           onSuccess: { self.tableView.reloadData() },
                                           onFailure: { (errorString) in
                                             showAlert(callingVC: self, title: "Tweet Search", message: "Could not find any matching tweets")
