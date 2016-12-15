@@ -23,6 +23,7 @@ public class TweetDataManager {
     private static let theSharedInstance = TweetDataManager()
     
     private var tweetData: [Tweet] = []
+    private var tweetMetaData: TweetMetaData?
     
     //count of filtered items
     public var tweetCount: Int {
@@ -55,15 +56,43 @@ public class TweetDataManager {
         }
     }
     
-    public func getTweets(forQuery queryString: String, maxId: String, lang: String = "en", onSuccess: @escaping ()-> Void, onFailure: @escaping (String) -> Void) {
-        var toAppendResults = false
-        var theURL = tweetSearchApi + (queryString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+    public func getTweets(matchine searchString: String, lang: String = "en", onSuccess: @escaping ()-> Void, onFailure: @escaping (String) -> Void) {
+
+        var queryURL = "?q=" + (searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        
+        // language ISO 639-1
+        queryURL += "&lang=\(lang)"
+        
+        getData(forQuery: queryURL,
+                  appendResults: false,
+                  onSuccess: { onSuccess() },
+                  onFailure: { (errorString) in
+                    onFailure(errorString)
+        })
+        /*
+        var requestHeaderDict = self.defaultRequestHeader
+        requestHeaderDict[RequestHeader.authorization.rawValue] = kAppBearerAuthKey
+        
+        HttpManager.sharedInstance().getData(httpMethod: .Get,
+                                             url: theURL,
+                                             requestHeaderDict: requestHeaderDict,
+                                             requestBodyData: nil,
+                                             onSuccess: { (apiResponse) in
+                                                DispatchQueue.main.async {
+                                                    self.populateTweets(apiResponse: apiResponse, toAppend: toAppendResults)
+                                                    onSuccess()
+                                                }
+        }) { (apiResponse) in
+            //Failure. Signal back onFailure to calling program
+            onFailure(apiResponse.statusMessage)
+        }*/
+    }
+
+    private func getData(forQuery queryString: String, lang: String = "en", appendResults: Bool, onSuccess: @escaping ()-> Void, onFailure: @escaping (String) -> Void) {
+        var theURL = tweetSearchApi + queryString
+        
         // language ISO 639-1
         theURL += "&lang=\(lang)"
-        if !maxId.isEmpty {
-            toAppendResults = true
-            theURL += "&max_id=\(maxId)"
-        }
         var requestHeaderDict = self.defaultRequestHeader
         requestHeaderDict[RequestHeader.authorization.rawValue] = kAppBearerAuthKey
         
@@ -73,7 +102,7 @@ public class TweetDataManager {
             requestBodyData: nil,
             onSuccess: { (apiResponse) in
                 DispatchQueue.main.async {
-                    self.populateTweets(apiResponse: apiResponse, toAppend: toAppendResults)
+                    self.populateTweets(apiResponse: apiResponse, toAppend: appendResults)
                     onSuccess()
                 }
         }) { (apiResponse) in
@@ -81,7 +110,43 @@ public class TweetDataManager {
             onFailure(apiResponse.statusMessage)
         }
     }
-    
+
+    public func getNextTweets(lang: String = "en", onSuccess: @escaping ()-> Void, onFailure: @escaping (String) -> Void) {
+        
+        // fetch next results only if the API returned metaData with next_results parameter
+        guard let nextResultsUrl = tweetMetaData?.nextResultUrl else {
+            return
+        }
+        
+        getData(forQuery: nextResultsUrl,
+                  appendResults: true,
+                  onSuccess: { onSuccess() },
+                  onFailure: { (errorString) in
+                    onFailure(errorString)
+            })
+/*        let toAppendResults = true
+        var theURL = tweetSearchApi + nextResultsUrl
+        // language ISO 639-1
+        theURL += "&lang=\(lang)"
+
+        var requestHeaderDict = self.defaultRequestHeader
+        requestHeaderDict[RequestHeader.authorization.rawValue] = kAppBearerAuthKey
+        
+        HttpManager.sharedInstance().getData(httpMethod: .Get,
+                                             url: theURL,
+                                             requestHeaderDict: requestHeaderDict,
+                                             requestBodyData: nil,
+                                             onSuccess: { (apiResponse) in
+                                                DispatchQueue.main.async {
+                                                    self.populateTweets(apiResponse: apiResponse, toAppend: toAppendResults)
+                                                    onSuccess()
+                                                }
+        }) { (apiResponse) in
+            //Failure. Signal back onFailure to calling program
+            onFailure(apiResponse.statusMessage)
+        }*/
+    }
+
     func getTweet(at index: Int, onComplete: ((Int) -> Void)?) -> Tweet? {
         if tweetData.count == 0 || (index < 0 || index > (tweetData.count - 1)) {
             return nil
@@ -125,6 +190,9 @@ public class TweetDataManager {
                     tweetData.append(_tweet)
                 }
             }
+        }
+        if let JSONObject = apiResponse.responseJSON?["search_metadata"] as? [String: AnyObject] {
+            tweetMetaData = TweetMetaData(withJSON: JSONObject)
         }
     }
     

@@ -80,7 +80,10 @@ class ViewController: UIViewController {
     }
 }
 
+//MARK: - UITableView DataSource, Delegate and supporting methods
+//MARK:
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -96,7 +99,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let data = TweetDataManager.shared.getTweet(at: indexPath.row, onComplete: nil) {
             populateData(forcell: cell, data: data, at: indexPath.row)
-            fetchMoreTweets(currentRow: indexPath.row, data: data)
+            fetchMoreTweets(currentRow: indexPath.row)
         }
 
         return cell
@@ -106,12 +109,23 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    /**
+     Refresh item is called from the TweetDataManager, when image data is downloaded and needs UI refresh
+    */
     func refreshItem(at index: Int) {
-        /*let indexPath = IndexPath(item: index, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .automatic)*/
-        tableView.reloadData()
+        //Optimisation: Check if index of the item to refresh is among the visibleCells, then update the `imageSmall`
+        if let data = TweetDataManager.shared.getTweet(at: index, onComplete: nil) {
+            if let visibleCell = tableView.visibleCells.filter( { ($0 as! TweetCell).userName.text == data.user.screenName } ).first as? TweetCell {
+                if let imageData = data.user.profileImageData {
+                    visibleCell.imageSmall.image = UIImage(data: imageData)
+                }
+            }
+        }
     }
     
+    /**
+     Populates the data for the tweetCell at row with the provided data
+    */
     func populateData(forcell cell: TweetCell, data: Tweet, at row: Int) {
         cell.name.text = data.user.name
         cell.userName.text = data.user.screenName
@@ -128,14 +142,31 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func fetchMoreTweets(currentRow: Int, data: Tweet) {
+    /**
+     Fetches more tweets if the currentRow is the last of the tweetCount
+    */
+    func fetchMoreTweets(currentRow: Int) {
         let tweetCount = TweetDataManager.shared.tweetCount
         let visibleTweetCount = tableView.visibleCells.count
+        guard visibleTweetCount != 0 else {
+            return
+        }
 
-        //Fetch more tweets only if there are more tweets than those visible
+        //Fetch more tweets only if there are more tweets than those visible on the screen
         if currentRow == tweetCount - 1 && tweetCount > visibleTweetCount {
-            self.searchTweet(searchString: resultSearchController?.searchBar.text ?? "", maxId: data.idStr)
-            tableView.reloadData()
+            /*
+            //Option1: fetch next results as per the maxId of the last row in tweets
+            if let maxId = TweetDataManager.shared.getTweet(at: tweetCount-1, onComplete: nil)?.idStr {
+                self.searchTweet(searchString: resultSearchController?.searchBar.text ?? "", maxId: maxId)
+                tableView.reloadData()
+            }*/
+            
+            //Option2: Query as per the next_results metaData returned by the search API 
+            TweetDataManager.shared.getNextTweets(onSuccess: { 
+                self.tableView.reloadData()
+            }, onFailure: { (errorString) in
+                //No more tweets, so nothing to update
+            })
         }
     }
 }
@@ -174,8 +205,7 @@ extension ViewController: UISearchBarDelegate {
     }
     
     func searchTweet(searchString: String, maxId: String = "") {
-        TweetDataManager.shared.getTweets(forQuery: searchString,
-                                          maxId: maxId,
+        TweetDataManager.shared.getTweets(matchine: searchString,
                                           onSuccess: { self.tableView.reloadData() },
                                           onFailure: { (errorString) in
                                             showAlert(callingVC: self, title: "Tweet Search", message: "Could not find any matching tweets")

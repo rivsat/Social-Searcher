@@ -51,3 +51,43 @@ struct Tweet {
         user = _user
     }
 }
+
+/*
+ "search_metadata": {
+ "completed_in": 0.055,
+ "max_id": 806764287205064705,
+ "max_id_str": "806764287205064705",
+ "query": "rivsat",
+ "refresh_url": "?since_id=806764287205064705&q=rivsat&include_entities=1",
+ "count": 15,
+ "since_id": 0,
+ "since_id_str": "0"
+ }
+
+ */
+struct TweetMetaData {
+    let completedIn: Double
+    let maxIdStr: String
+    let query: String
+    let nextResultUrl: String
+    let refreshUrl: String
+    let sinceIdStr: String
+    
+    init?(withJSON json: [String: AnyObject]) {
+            guard let _completedIn = json["completed_in"] as? Double,
+                let _maxIdStr = json["max_id_str"] as? String,
+                let _query = json["query"] as? String,
+                let _nextResultUrl = json["next_results"] as? String,
+                let _refreshUrl = json["refresh_url"] as? String,
+                let _sinceIdStr = json["since_id_str"] as? String
+                else {
+                    return nil
+            }
+        completedIn = _completedIn
+        maxIdStr = _maxIdStr
+        query = _query
+        nextResultUrl = _nextResultUrl
+        refreshUrl = _refreshUrl
+        sinceIdStr = _sinceIdStr
+    }
+}
