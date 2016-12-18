@@ -155,7 +155,7 @@ public class TweetDataManager {
         var requestHeaderDict = self.defaultRequestHeader
         requestHeaderDict[RequestHeader.authorization.rawValue] = kAppBearerAuthKey
 
-        var data = tweetData[index]
+        let data = tweetData[index]
         guard data.user.profileImageData != nil else {
             //start the image download
             HttpManager.sharedInstance().getData(httpMethod: .Get,
