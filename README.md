@@ -27,4 +27,4 @@ Tasvir Rohila <tasvir.rohila@gmail.com>
 
 License
 ========
-No licence required.
+No licence required to use this app.
